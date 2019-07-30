@@ -1,0 +1,25 @@
+/**index.wxss**/
+
+.book-item {
+  height: 200rpx;
+  width: 100%;
+  background-color: #ffffff;
+  border-width: 0.5px;
+  border-color: #ededed;
+  border-bottom-style: solid;
+}
+
+.homepage-add {
+  width: 100rpx;
+  height: 100rpx;
+  position: fixed;
+  right: 10%;
+  bottom: 8%;
+  background-color: transparent;
+}
+
+.add-img {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+}

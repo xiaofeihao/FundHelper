@@ -1,0 +1,10 @@
+<!--index.wxml-->
+<view class="container">
+  <view wx:for="{{array}}" class="book-item">
+      {{index}}: {{item.message}}
+  </view>
+
+  <view class="homepage-add" bindtap="clickAdd">
+    <image class="add-img" src="../../images/bookmark_add.png"/>
+  </view>
+</view>

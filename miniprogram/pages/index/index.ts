@@ -11,7 +11,7 @@ Page({
     }, {
       message: 'bar'
       }, {
-        message: 'bar'
+        message: 'message'
       }, {
         message: 'bar'
       }, {

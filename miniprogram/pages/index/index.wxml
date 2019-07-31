@@ -1,7 +1,16 @@
 <!--index.wxml-->
 <view class="container">
-  <view wx:for="{{array}}" class="book-item">
-      {{index}}: {{item.message}}
+  <view wx:for="{{books}}" class="book-item">
+      <image class=".list-item-front-image" src="{{item.frontImage}}"/>
+      <view class=".list-item-title-container">
+        <text class=".list-item-title">{{item.title}}</text>
+        <text class=".list-item-author">{{item.author}}</text>
+        <progress class=".list-item-progress" percent="{{item.percent}}" border-radius="5" />
+        <view class=".list-item-extra">
+        <text class=".list-item-page-text">{{item.currentPage}}/{{item.totalPages}}</text>
+        <text class=".list-item-page-text">{{item.lastDate}}</text>
+        </view>
+      </view>
   </view>
 
   <view class="homepage-add" bindtap="clickAdd">

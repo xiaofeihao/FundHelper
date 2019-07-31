@@ -5,11 +5,11 @@
   ],
   "tabBar": {
     "color": "#8a8a8a",
-    "selectedColor": "#1296db",
+    "selectedColor": "#09BB07",
     "list":[
       {
         "pagePath": "pages/index/index",
-        "text": "首页",
+        "text": "读书",
         "iconPath": "images/bookmark_homepage_gray.png",
         "selectedIconPath": "images/bookmark_homepage_pressed.png"
       },{

@@ -6,25 +6,7 @@ const app = getApp<IMyApp>()
 
 Page({
   data: {
-    array: [{
-      message: 'foo',
-    }, {
-      message: 'bar'
-      }, {
-        message: 'message'
-      }, {
-        message: 'bar'
-      }, {
-        message: 'bar'
-      }, {
-        message: 'bar'
-      }, {
-        message: 'bar'
-      }, {
-        message: 'bar'
-      }, {
-        message: 'bar'
-      }]
+    books: app.globalData.books
   },
   //事件处理函数
   bindViewTap() {
@@ -33,7 +15,7 @@ Page({
     })
   },
   onLoad() {
-    console.log(app.globalData.count);
+    
   },
   clickAdd() {
     console.log("点击了增加按钮");

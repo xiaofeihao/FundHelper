@@ -1,18 +1,20 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/add/add"
   ],
   "tabBar": {
     "color": "#8a8a8a",
     "selectedColor": "#09BB07",
-    "list":[
+    "list": [
       {
         "pagePath": "pages/index/index",
         "text": "读书",
         "iconPath": "images/bookmark_homepage_gray.png",
         "selectedIconPath": "images/bookmark_homepage_pressed.png"
-      },{
+      },
+      {
         "pagePath": "pages/logs/logs",
         "text": "统计",
         "iconPath": "images/bookmark_statics_gray.png",

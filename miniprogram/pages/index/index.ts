@@ -18,6 +18,8 @@ Page({
     
   },
   clickAdd() {
-    console.log("点击了增加按钮");
+    wx.navigateTo({
+      url: '../add/add'
+    })
   }
 })

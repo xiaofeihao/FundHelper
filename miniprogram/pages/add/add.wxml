@@ -1,0 +1,12 @@
+<!--miniprogram/pages/add/add.wxml-->
+<view class="add-container">
+  <view class="add-base-info">
+    <image src="{{book&&book.frontImage ? book.frontImage : '../../images/bookmark_camera.png'}}" 
+    class="add-front-img" mode="center" bindtap="clickImage"/>
+    <view class="add-base-info-text-container">
+      <input class="add-base-info-text" placeholder="{{book&&book.title ? book.title : '书名'}}" bindinput="bookNameInput"/>
+      <input class="add-base-info-text" placeholder="{{book&&book.author ? book.author : '作者'}}" bindinput="bookAuthorInput"/>
+      <input class="add-base-info-text" placeholder="{{book&&book.totalPages ? book.totalPages : '总页数'}}" bindinput="bookTotalPageInput"/>
+    </view>
+  </view>
+</view>

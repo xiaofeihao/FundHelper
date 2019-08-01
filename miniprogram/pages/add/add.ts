@@ -20,7 +20,19 @@ Page({
     
   },
   clickImage() {
-    console.log("点击了图片");
+    const pageThis = this;
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success (res) {
+        // tempFilePath可以作为img标签的src属性显示图片
+        currentBook.frontImage = res.tempFilePaths[0];
+        pageThis.setData!({
+          book: currentBook
+        });
+      }
+    });
   },
   bookNameInput: function (e: any) {
     currentBook.title = e.detail.value;

@@ -13,6 +13,11 @@
       </view>
   </view>
 
+  <view wx:if="{{showFloatView}}" class="homepage-add-float-view">
+    <view wx:for="{{inputMode}}" class="homepage-add-float-view-item">
+      <text class="homepage-add-float-view-item-text" data-index="{{index}}" bindtap="clickAddItem">{{item}}</text>
+    </view>
+  </view>
   <view class="homepage-add" bindtap="clickAdd">
     <image class="add-img" src="../../images/bookmark_add.png"/>
   </view>

@@ -1,12 +1,48 @@
 <!--miniprogram/pages/add/add.wxml-->
 <view class="add-container">
-  <view class="add-base-info">
-    <image src="{{book&&book.frontImage ? book.frontImage : '../../images/bookmark_camera.png'}}" 
-    class="add-front-img" mode="center" bindtap="clickImage"/>
-    <view class="add-base-info-text-container">
-      <input class="add-base-info-text" placeholder="{{book&&book.title ? book.title : '书名'}}" bindinput="bookNameInput"/>
-      <input class="add-base-info-text" placeholder="{{book&&book.author ? book.author : '作者'}}" bindinput="bookAuthorInput"/>
-      <input class="add-base-info-text" placeholder="{{book&&book.totalPages ? book.totalPages : '总页数'}}" bindinput="bookTotalPageInput"/>
+  <view class="add-input-form">
+    <view class="add-base-info">
+      <image src="{{frontImage ? frontImage : '../../images/bookmark_camera.png'}}" 
+      class="add-front-img" mode="center" bindtap="clickImage"/>
+      <view class="add-base-info-text-container">
+        <input class="add-base-info-text" placeholder="书名（必填）" value = "{{title ? title : ''}}" bindinput="bookNameInput"/>
+        <input class="add-base-info-text" placeholder="作者（必填）" value = "{{author ? author : ''}}" bindinput="bookAuthorInput"/>
+        <input class="add-base-info-text" placeholder="总页数（必填）" value  = "{{totalPages ? totalPages : ''}}" bindinput="bookTotalPageInput"/>
+      </view>
+    </view>
+    <view class="add-reading-status-label">
+      <text class="add-reading-status-text">在读</text>
+      <switch checked="{{reading}}" bindchange="readingStatusChange"/>
+    </view>
+    <view wx:if="{{reading}}" class="add-extra-info">
+      <text class="add-extra-info-label">当前阅读进度 {{percent}}%</text>
+      <progress percent="{{percent}}" border-radius="5"/>
+      <view class="add-extra-update-label">
+        <text class="add-extra-update-text">本次阅读始于</text>
+        <input class="add-extra-update-input" value="{{startPage}}"/>
+        <text class="add-extra-update-text">页</text>
+      </view>
+      <view class="add-extra-update-label">
+        <text class="add-extra-update-text">本次阅读止于</text>
+        <input class="add-extra-update-input" value="{{endPage}}"/>
+        <text class="add-extra-update-text">页</text>
+      </view>
+      <text class="add-extra-info-label">阅读原因：</text>
+      <view style="padding-right:20rpx;">
+      <textarea class="add-base-info-reason-input" placeholder="不忘初心！" value = "{{readReason?readReason:''}}" bindinput="bookReasonInput"/>
+      </view>
+    </view>
+    <view class="add-button-container">
+      <view wx:if="{{openThoughtButton}}" class="add-input-thought"><text class="add-input-thought-text">写感想</text></view>
+      <view class="add-input-submit"><text class="add-input-submit-text">更新</text></view>
+    </view>
+    <view class="add-book-extra-info">
+      <text class="add-extra-info-label">书籍其他信息：</text>
+      <input class="add-base-info-text add-book-extra-info-input" placeholder="出版社（选填）" value = "{{publishHouse?publishHouse:''}}" bindinput="bookPublishHouseInput"/>
+        <input class="add-base-info-text add-book-extra-info-input" placeholder="出版时间（选填）" value = "{{publishDate ? publishDate : ''}}" bindinput="bookPublishDateInput"/>
+        <view style="padding-right:20rpx;">
+        <textarea class="add-base-info-reason-input" placeholder="内容简介（选填）" value  = "{{description ? description : ''}}" bindinput="bookDescriptionInput"/>
+        </view>
     </view>
   </view>
 </view>

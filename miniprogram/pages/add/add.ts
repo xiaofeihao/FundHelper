@@ -1,20 +1,22 @@
-import { Book } from "../../data/dataModel";
-
-let currentBook: Book = {
-  title: "",
-  totalPages: 0,
-  readReason: "",
-  reading: true,
-  frontImage: "",
-  currentPage: 0,
-  percent: 0,
-  author: "",
-  lastDate: ""
-};
 
 Page({
   data: {
-    book: {}
+    title: "", // 标题
+    frontImage: "", // 图片
+    totalPages: 0, // 总页数
+    currentPage: 0, // 当前阅读的页数
+    lastDate: "", // 最新更新时间 年-月-日
+    author: "", // 作者
+    description: "", // 简介
+    readReason: "", // 初心，阅读理由
+    thoughts: null, // 感想
+    reading: true, // 是否在读
+    percent: 10, // 当前进度
+    startPage: 0,
+    endPage: 0,
+    publishHouse: "",
+    publishDate: "",
+    openThoughtButton: false
   },
   onLoad() {
     
@@ -27,32 +29,50 @@ Page({
       sourceType: ['album', 'camera'],
       success (res) {
         // tempFilePath可以作为img标签的src属性显示图片
-        currentBook.frontImage = res.tempFilePaths[0];
         pageThis.setData!({
-          book: currentBook
+          frontImage: res.tempFilePaths[0]
         });
       }
     });
   },
   bookNameInput: function (e: any) {
-    currentBook.title = e.detail.value;
     this.setData!({
-      book: currentBook
+      title: e.detail.value
     })
-    console.log(this.data.book);
   },
   bookAuthorInput: function (e: any) {
-    currentBook.author = e.detail.value;
     this.setData!({
-      book: currentBook
+      author: e.detail.value
     })
-    console.log(this.data.book);
   },
   bookTotalPageInput: function (e: any) {
-    currentBook.totalPages = Number(e.detail.value);
     this.setData!({
-      book: currentBook
+      totalPages: Number(e.detail.value)
     })
-    console.log(this.data.book);
   },
+  readingStatusChange: function (e: any) {
+    this.setData!({
+      reading: e.detail.value
+    })
+  },
+  bookReasonInput: function(e: any) {
+    this.setData!({
+      readReason: e.detail.value
+    })
+  },
+  bookPublishHouseInput: function(e: any) {
+    this.setData!({
+      publishHouse: e.detail.value
+    })
+  },
+  bookPublishDateInput: function (e: any) {
+    this.setData!({
+      publishDate: e.detail.value
+    })
+  },
+  bookDescriptionInput: function (e: any) {
+    this.setData!({
+      description: e.detail.value
+    })
+  }
 })

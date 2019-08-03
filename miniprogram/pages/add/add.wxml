@@ -3,7 +3,7 @@
   <view class="add-input-form">
     <view class="add-base-info">
       <image src="{{frontImage ? frontImage : '../../images/bookmark_camera.png'}}" 
-      class="add-front-img" mode="center" bindtap="clickImage"/>
+      class="add-front-img" mode="aspectFit" bindtap="clickImage"/>
       <view class="add-base-info-text-container">
         <input class="add-base-info-text" placeholder="书名（必填）" value = "{{title ? title : ''}}" bindinput="bookNameInput"/>
         <input class="add-base-info-text" placeholder="作者（必填）" value = "{{author ? author : ''}}" bindinput="bookAuthorInput"/>

@@ -1,7 +1,8 @@
+import { getBookImage } from '../../network/netService'
 
 Page({
   data: {
-    title: "", // 标题
+    title: "", // 书名
     frontImage: "", // 图片
     totalPages: 0, // 总页数
     currentPage: 0, // 当前阅读的页数
@@ -11,14 +12,41 @@ Page({
     readReason: "", // 初心，阅读理由
     thoughts: null, // 感想
     reading: true, // 是否在读
-    percent: 10, // 当前进度
+    percent: 0, // 当前进度
     startPage: 0,
     endPage: 0,
     publishHouse: "",
     publishDate: "",
     openThoughtButton: false
   },
-  onLoad() {
+  onLoad(option:any) {
+    console.log(option);
+    if(Number(option.from)===0){
+      // 扫码过来的
+      if(option.errMessage){
+        // 说明有错误
+        wx.showToast({
+          title: option.errMessage,
+          icon: 'none',
+          duration: 2000
+        })
+      }else{
+        let pages: string = option.totalPages ? option.totalPages : '0';
+        let length: number = pages.length;
+        if(pages.lastIndexOf('页') !== -1){
+          pages = pages.substring(0, length-1);
+        }
+        this.setData!({
+          title: option.title ? option.title : "",
+          author: option.author ? option.author : "",
+          frontImage: option.imageId ? getBookImage(option.imageId) : "",
+          publishHouse: option.publishHouse ? option.publishHouse : "",
+          totalPages: Number(pages)
+        })
+      }
+    } else if (Number(option.from) === 1){
+      console.log("点击手动添加进来的")
+    }
     
   },
   clickImage() {

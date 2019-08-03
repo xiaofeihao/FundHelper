@@ -23,9 +23,6 @@
 .add-front-img {
   width: 180rpx;
   height: 270rpx;
-  border-width: 1px;
-  border-color: #09BB07;
-  border-style: solid;
 }
 
 .add-base-info-text-container {

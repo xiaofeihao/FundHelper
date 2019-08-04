@@ -18,7 +18,13 @@ Page({
     })
   },
   onLoad() {
-    
+    console.log('onLoad..');
+  },
+  onShow() {
+    console.log('onShow..');
+    this.setData!({
+      books: wx.getStorageSync("books")
+    })
   },
   clickAdd() {
     let show = this.data.showFloatView;

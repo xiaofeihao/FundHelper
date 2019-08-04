@@ -34,7 +34,7 @@
     </view>
     <view class="add-button-container">
       <view wx:if="{{openThoughtButton}}" class="add-input-thought"><text class="add-input-thought-text">写感想</text></view>
-      <view class="add-input-submit"><text class="add-input-submit-text">更新</text></view>
+      <view class="add-input-submit" bindtap="clickUpdateSave"><text class="add-input-submit-text">更新</text></view>
     </view>
     <view class="add-book-extra-info">
       <text class="add-extra-info-label">书籍其他信息：</text>

@@ -156,6 +156,10 @@
   display: flex;
 }
 
+.add-input-delete {
+  background-color: #ff0000;
+}
+
 .add-input-thought-text {
   color: #232528;
   font-size: 15px;

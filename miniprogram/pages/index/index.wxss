@@ -12,6 +12,20 @@
   flex-direction: row;
 }
 
+.homepage-empty-view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.homepage-empty-view-text {
+  color: #09BB07;
+  font-size: 20px;
+  text-align: center;
+}
+
 .homepage-add {
   width: 80rpx;
   height: 80rpx;

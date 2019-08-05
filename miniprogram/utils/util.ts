@@ -8,7 +8,7 @@ export function formatTime(date: Date): string {
   const minute = date.getMinutes()
   const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
 const formatNumber = (n: number) => {
@@ -16,7 +16,7 @@ const formatNumber = (n: number) => {
   return str[1] ? str : '0' + str
 }
 
-export function isBookInfoAvailable (book: Book): string {
+export function isBookInfoAvailable(book: Book): string {
   // 检查书名
   if (!confirmStrLength(book.title)) {
     return getErroMessage(book.title, "书名");
@@ -49,5 +49,19 @@ const getErroMessage = (str: string, prefix: string): string => {
     return prefix + "“" + str + "”不符合要求";
   } else {
     return prefix + "不能为空";
+  }
+}
+
+export function getImageId(imageUrl: string): string {
+  let index: number = imageUrl.indexOf("=");
+  return imageUrl.substring(index + 1, imageUrl.length);
+}
+
+export function getAddUrl(book: Book): string {
+  let url = "../add/add?title=" + book.title + "&totalPages=" + book.totalPages + "&author=" + book.author + "&publishHouse=" + book.publishHouse + "&currentPage=" + book.currentPage + "&startPage=" + book.startPage + "&endPage=" + book.endPage + "&lastDate=" + book.lastDate + "&description=" + book.description + "&readReason=" + book.readReason + "&reading=" + book.reading + "&percent=" + book.percent + "&publishDate=" + book.publishDate + "&from=2";
+  if (book.frontImage.indexOf("=") !== -1) {
+    return url + "&imageId=" + getImageId(book.frontImage);
+  } else {
+    return url + "&frontImage=" + book.frontImage;
   }
 }

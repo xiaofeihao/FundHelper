@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <view wx:for="{{books}}" class="book-item">
+  <view wx:for="{{books}}" class="book-item" bindtap="clickBookItem" id="{{index}}">
       <image class=".list-item-front-image" src="{{item.frontImage}}"/>
       <view class=".list-item-title-container">
         <text class=".list-item-title">{{item.title}}</text>
@@ -11,6 +11,10 @@
         <text class=".list-item-page-text">{{item.lastDate}}</text>
         </view>
       </view>
+  </view>
+
+  <view wx:if="{{isEmpty}}" class="homepage-empty-view">
+  <text class="homepage-empty-view-text">书籍是人类进步的阶梯\n你还没开始爬呢~\n列表空空如也，快点添加吧~</text>
   </view>
 
   <view wx:if="{{showFloatView}}" class="homepage-add-float-view">

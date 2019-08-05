@@ -1,9 +1,6 @@
 import { getBookImage } from '../../network/netService'
-import { isBookInfoAvailable } from '../../utils/util'
+import { isBookInfoAvailable, formatTime } from '../../utils/util'
 import { Book } from '../../data/dataModel'
-import { IMyApp } from '../../app'
-
-const app = getApp<IMyApp>()
 
 Page({
   data: {
@@ -22,7 +19,9 @@ Page({
     endPage: 0,
     publishHouse: "",
     publishDate: "",
-    openThoughtButton: false
+    openThoughtButton: false,
+    pageFrom: 1,
+    currentTitle: "" // 删除时用
   },
   onLoad(option: any) {
     console.log(option);
@@ -30,6 +29,9 @@ Page({
       // 扫码过来的
       if (option.errMessage) {
         // 说明有错误
+        this.setData!({
+          pageFrom: 0
+        })
         wx.showToast({
           title: option.errMessage,
           icon: 'none',
@@ -46,11 +48,35 @@ Page({
           author: option.author ? option.author : "",
           frontImage: option.imageId ? getBookImage(option.imageId) : "",
           publishHouse: option.publishHouse ? option.publishHouse : "",
-          totalPages: Number(pages)
+          totalPages: Number(pages),
+          pageFrom: 0,
+          currentTitle: option.title ? option.title : "",
         })
       }
     } else if (Number(option.from) === 1) {
       console.log("点击手动添加进来的")
+      this.setData!({
+        pageFrom: 1
+      })
+    } else if (Number(option.from) === 2) {
+      this.setData!({
+        title: option.title,
+        author: option.author,
+        frontImage: option.frontImage ? option.frontImage : getBookImage(option.imageId),
+        publishHouse: option.publishHouse,
+        totalPages: Number(option.totalPages),
+        currentPage: Number(option.currentPage),
+        publishDate: option.publishDate,
+        lastDate: option.lastDate,
+        reading: option.reading,
+        readReason: option.readReason,
+        startPage: Number(option.startPage),
+        endPage: Number(option.endPage),
+        percent: Number(option.percent),
+        description: option.description,
+        pageFrom: 2,
+        currentTitle: option.title
+      })
     }
 
   },
@@ -88,6 +114,30 @@ Page({
       reading: e.detail.value
     })
   },
+  bookStartInput: function (e: any) {
+    let start: number = 0;
+    try {
+      start = Number(e.detail.value);
+    } catch (e) {
+      start = this.data.startPage;
+    }
+    console.log(start);
+    this.setData!({
+      startPage: start
+    })
+  },
+  bookEndInput: function (e: any) {
+    let end: number = 0;
+    try {
+      end = Number(e.detail.value);
+    } catch (e) {
+      end = this.data.startPage;
+    }
+    console.log(end);
+    this.setData!({
+      endPage: end
+    })
+  },
   bookReasonInput: function (e: any) {
     this.setData!({
       readReason: e.detail.value
@@ -111,9 +161,13 @@ Page({
   clickUpdateSave() {
     // 保存书籍信息
     let tempPercent = 0;
+    let tempPages: number = this.data.endPage - this.data.startPage;
+    console.log(tempPages);
     if (this.data.totalPages !== 0) {
-      tempPercent = this.data.currentPage / this.data.totalPages;
+      tempPercent = tempPages * 100 / this.data.totalPages;
     }
+    let tempCurrent: number = this.data.currentPage + tempPages;
+    let date: string = formatTime(new Date());
     const book: Book = {
       title: this.data.title,
       frontImage: this.data.frontImage,
@@ -121,8 +175,8 @@ Page({
       totalPages: this.data.totalPages,
       readReason: this.data.readReason,
       reading: this.data.reading,
-      currentPage: this.data.currentPage,
-      lastDate: this.data.lastDate,
+      currentPage: tempCurrent,
+      lastDate: date,
       description: this.data.description,
       thoughts: this.data.thoughts,
       percent: tempPercent,
@@ -146,9 +200,16 @@ Page({
         title: "正在保存...",
         mask: true
       });
-      let books: Array<Book> = app.globalData.books;
+      let books: Array<Book> = wx.getStorageSync("books");
       if (books) {
-        let tempBook: Array<Book> = books.filter(value => value.title === book.title);
+        if (this.data.pageFrom === 2) {
+          // 说明是编辑
+          books = books.filter(value => value.title !== this.data.currentTitle);
+          books.push(book);
+          this.saveBooks(books);
+          return;
+        }
+        let tempBook: Array<Book> = books.filter(value => value.title === this.data.currentTitle);
         if (tempBook.length > 0) {
           wx.hideLoading();
           wx.showModal({
@@ -178,16 +239,17 @@ Page({
     }
   },
   saveBooks(books: Array<Book>) {
+    let tempBooks: Array<Book> = books.reverse();
     wx.setStorage({
       key: "books",
-      data: books,
-      success: ()=>{
+      data: tempBooks,
+      success: () => {
         wx.hideLoading();
         wx.navigateBack({
           delta: 1
         })
       },
-      fail: ()=>{
+      fail: () => {
         wx.hideLoading();
         wx.showToast({
           title: "保存失败",
@@ -196,5 +258,20 @@ Page({
         });
       }
     })
+  },
+  clickDelete() {
+    wx.showModal({
+      title: "删除",
+      content: "确定要删除吗？",
+      success: (res) => {
+        if (res.confirm) {
+          let books: Array<Book> = wx.getStorageSync("books");
+          if (books) {
+            books = books.filter(value => value.title !== this.data.currentTitle);
+            this.saveBooks(books);
+          }
+        }
+      }
+    });
   }
 })

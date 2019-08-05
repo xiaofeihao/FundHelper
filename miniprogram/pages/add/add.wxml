@@ -19,12 +19,12 @@
       <progress percent="{{percent}}" border-radius="5"/>
       <view class="add-extra-update-label">
         <text class="add-extra-update-text">本次阅读始于</text>
-        <input class="add-extra-update-input" value="{{startPage}}"/>
+        <input class="add-extra-update-input" value="{{startPage}}" type="number" bindinput="bookStartInput"/>
         <text class="add-extra-update-text">页</text>
       </view>
       <view class="add-extra-update-label">
         <text class="add-extra-update-text">本次阅读止于</text>
-        <input class="add-extra-update-input" value="{{endPage}}"/>
+        <input class="add-extra-update-input" value="{{endPage}}" type="number" bindinput="bookEndInput"/>
         <text class="add-extra-update-text">页</text>
       </view>
       <text class="add-extra-info-label">阅读原因：</text>
@@ -34,6 +34,7 @@
     </view>
     <view class="add-button-container">
       <view wx:if="{{openThoughtButton}}" class="add-input-thought"><text class="add-input-thought-text">写感想</text></view>
+      <view class="add-input-submit add-input-delete" bindtap="clickDelete"><text class="add-input-submit-text">删除</text></view>
       <view class="add-input-submit" bindtap="clickUpdateSave"><text class="add-input-submit-text">更新</text></view>
     </view>
     <view class="add-book-extra-info">

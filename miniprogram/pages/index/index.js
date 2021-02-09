@@ -64,8 +64,13 @@ Page({
         fundList.push(fundItem);
       });
       wx.hideLoading();
+      var totalIncome = 0;
+      fundList.forEach(item => {
+        totalIncome += Number(item.income);
+      })
       _this.setData({
-        fundData: fundList
+        fundData: fundList,
+        totalIncome: totalIncome.toFixed(2)
       })
     }, function (error) {
       console.log(error)

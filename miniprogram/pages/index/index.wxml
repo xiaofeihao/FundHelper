@@ -8,7 +8,7 @@
 
   <swiper current='{{current}}' bindchange="bindChange" style='height:{{contentheight}}px'>
     <swiper-item>
-      <myFund contentHeight="{{contentheight}}" fundList="{{fundData}}" needAdapt="{{needAdapt}}"/>
+      <myFund contentHeight="{{contentheight}}" fundList="{{fundData}}" needAdapt="{{needAdapt}}" totalIncome="{{totalIncome}}"/>
     </swiper-item>
     <swiper-item>
       <text>热点</text>

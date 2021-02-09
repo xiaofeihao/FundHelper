@@ -26,7 +26,8 @@ Component({
       type: Array,
       value: []
     },
-    needAdapt: Boolean
+    needAdapt: Boolean,
+    totalIncome: Number
   },
 
   /**
@@ -75,6 +76,9 @@ Component({
     },
     'needAdapt': function(needAdapt) {
       console.log('needAdapt = ', needAdapt);
+    },
+    'totalIncome': function(income) {
+      console.log('totalIncome = ', income);
     }
   },
 

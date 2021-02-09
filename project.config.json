@@ -39,7 +39,7 @@
   },
   "appid": "wx020c0f6a23fb6ebb",
   "projectname": "FundHelper",
-  "libVersion": "2.14.1",
+  "libVersion": "2.15.0",
   "condition": {
     "search": {
       "list": []

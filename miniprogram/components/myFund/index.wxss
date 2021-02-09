@@ -29,6 +29,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-direction: row;
   width: 100%;
 }
 
@@ -72,9 +73,12 @@
 .footer-bar-label {
   display: flex;
   flex-direction: column;
+  width: 0;
+  flex: 1;
 }
 
 .footer-btn-con {
   display: flex;
   flex-direction: row;
+  background-color: white;
 }

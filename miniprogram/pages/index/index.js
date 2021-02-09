@@ -139,7 +139,7 @@ Page({
       title: '删除自选',
       content: '是否要删除：' + editFund.name,
       cancelText: '确定',
-      cancelColor: 'red',
+      cancelColor: '#ff0000',
       confirmText: '取消',
       confirmColor: '#000000',
       success(res) {

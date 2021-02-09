@@ -68,7 +68,7 @@ Component({
   observers: {
     'contentHeight': function(height) {
       this.setData({
-        setting: {...this.data.setting, tbodyHeight: height-100}
+        setting: {...this.data.setting, tbodyHeight: height-130}
       });
     },
     'fundList': function(list) {

@@ -1,6 +1,7 @@
 // pages/addFunction/addFunction.js
 
 const { getFundInfo } = require("../../network/netManager");
+const { saveFund } = require("../../utils/commonUtils");
 
 var globalData = getApp().globalData;
 
@@ -63,10 +64,10 @@ Page({
         if (!!fundShare && fundShare > 0) {
           globalData.fundShare[fundCode] = Number(fundShare);
         } else {
-          globalData.fundShare[fundCOde] = 0;
+          globalData.fundShare[fundCode] = 0;
         }
         console.log(newCodes, globalData.fundShare)
-        this.storeGlobalData();
+        this.saveGlobalData();
       } else {
         wx.showToast({
           title: '该基金已在自选列表',
@@ -80,19 +81,12 @@ Page({
       } else {
         globalData.fundShare[fundCode] = 0;
       }
-      this.storeGlobalData();
+      this.saveGlobalData();
     }
   },
 
-  storeGlobalData: function () {
-    wx.setStorage({
-      data: globalData.fundCodes,
-      key: 'fundCodes',
-    });
-    wx.setStorage({
-      data: globalData.fundShare,
-      key: 'fundShare',
-    });
+  saveGlobalData: function () {
+    saveFund(globalData.fundCodes, globalData.fundShare);
     wx.showLoading({
       title: '正在添加',
       success: function () {

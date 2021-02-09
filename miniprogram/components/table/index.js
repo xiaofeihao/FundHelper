@@ -116,6 +116,11 @@ Component({
     btnAction: function (e) {
       let value = e.currentTarget.dataset.value // value：一个包含点击行所有数据的对象
       this.triggerEvent("getCurrentValue", value)
+    },
+    itemAction: function(e) {
+      console.log('click Item ', e.currentTarget.dataset.value)
+      var editFund = e.currentTarget.dataset.value;
+      this.triggerEvent("clickFundItem", editFund)
     }
   }
 })

@@ -1,5 +1,6 @@
 //index.js
 const { getFundInfo } = require("../../network/netManager.js");
+const { saveFund } = require("../../utils/commonUtils.js");
 const app = getApp()
 
 Page({
@@ -79,6 +80,121 @@ Page({
 
   onReady: function () {
     console.log('====hxf onReady')
+  },
+
+  fundEditAction: function (value) {
+    console.log('页面回调 ', value);
+    var editFund = value.detail;
+    var _this = this;
+    wx.showActionSheet({
+      itemList: ['查看详情', '修改持仓', '删除'],
+      success(res) {
+        if (res.tapIndex === 0) {
+          // 查看详情
+        } else if (res.tapIndex === 1) {
+          // 修改持仓
+          _this.changeFund(editFund);
+        } else if (res.tapIndex === 2) {
+          // 删除
+          _this.deleteFund(editFund);
+        }
+      }
+    })
+  },
+
+  /**
+   * 刷新页面
+   * @param {*} newData 全新的自选基金数据
+   */
+  refreshData: function (newData) {
+    var totalIncome = 0;
+    newData.forEach(item => {
+      totalIncome += Number(item.income);
+    })
+    this.setData({
+      fundData: newData,
+      totalIncome: totalIncome.toFixed(2)
+    });
+  },
+
+  /**
+   * 删除自选
+   * @param {*} editFund 待删除基金
+   */
+  deleteFund: function (editFund) {
+    var code = editFund.id;
+    var fundCodes = app.globalData.fundCodes;
+    var _this = this;
+    wx.showModal({
+      title: '删除自选',
+      content: '是否要删除：' + editFund.name,
+      cancelText: '确定',
+      cancelColor: 'red',
+      confirmText: '取消',
+      confirmColor: '#000000',
+      success(res) {
+        if (res.cancel) {
+          // 因为弹框不支持按钮顺序，所以这里用原生的cancel代表确定删除
+          console.log('删除成功')
+          if (fundCodes) {
+            var fundArray = fundCodes.split(',');
+            fundArray.splice(fundArray.indexOf(code), 1);
+            app.globalData.fundCodes = fundArray.join(',');
+            delete app.globalData.fundShare[code];
+            var lastFundData = _this.data.fundData;
+            var newFundData = lastFundData.filter(value => value.id !== code);
+            _this.refreshData(newFundData);
+            saveFund();
+          }
+        } else if (res.confirm) {
+          console.log('取消删除')
+        }
+      }
+    })
+    
+    
+  },
+
+  /**
+   * 修改基金持仓
+   * @param {*} editFund 待修改基金
+   */
+  changeFund: function (editFund) {
+    var code = editFund.id;
+    var name = editFund.name;
+    var fundShare = app.globalData.fundShare;
+    var _this = this;
+    wx.showModal({
+      title: `修改${name}持仓`,
+      placeholderText: `${fundShare[code]}`,
+      editable: true,
+      success(res) {
+        if (res.confirm) {
+          console.log('修改成功：' + res.content);
+          var newShare = Number(res.content);
+          console.log(newShare)
+          if(isNaN(newShare) || newShare < 0){
+            wx.showToast({
+              title: '输入不合法',
+              icon: 'error'
+            });
+            _this.changeFund(editFund);
+            return;
+          }
+          fundShare[code] = newShare;
+          var fundData = _this.data.fundData;
+          fundData.forEach(item => {
+            if(item.id === code) {
+              item.income = (newShare * Number(item.expectGrowth) * Number(item.expectWorth) / (100 + Number(item.expectGrowth))).toFixed(2);
+            }
+          });
+          _this.refreshData(fundData);
+          saveFund();
+        } else if (res.cancel) {
+          console.log('取消修改');
+        }
+      }
+    });
   }
 
 })

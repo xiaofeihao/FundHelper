@@ -109,11 +109,7 @@ function date(val) {
 }
 
 function income(val) {
-  if(val < 0){
-    return '-'+val;
-  }else{
-    return val;
-  }
+  return val;
 }
 
 module.exports.time = time;

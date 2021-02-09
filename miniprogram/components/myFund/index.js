@@ -90,6 +90,11 @@ Component({
       wx.navigateTo({
         url: '/pages/addFunction/addFunction',
       })
+    },
+    clickFundItem: function(value) {
+      console.log('点击回调', value.detail)
+      var editFund = value.detail;
+      this.triggerEvent('fundEditAction', editFund)
     }
   }
 })

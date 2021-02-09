@@ -9,7 +9,7 @@
     </view>
     <scroll-view scroll-y style="max-height:{{config.tbodyHeight}}px;">
       <view class="tr" wx:for="{{fundList}}" wx:for-item="item" wx:key="index"
-        style="min-height:{{config.trHeight}}rpx;background:{{config.tbodyBgColor}};">
+        style="min-height:{{config.trHeight}}rpx;background:{{config.tbodyBgColor}};" bindtap="itemAction" data-value="{{item}}">
         <view class="td" wx:for="{{column}}" wx:for-item="col" wx:for-index="colIndex" wx:key="colIndex"
           style="flex-grow:0;flex-basis:{{headWidth=='100%'?(100/column.length)+'%':col.width+'rpx'}};color:{{config.tbodyColor}};font-size:{{config.tbodyFontSize}}rpx;font-weight:{{config.tbodyFontWeight}};border-right:{{colIndex==(column.length - 1)?'none':(config.tableInBorderLevel?'none':config.tableInBorder)}};border-bottom:{{index==fundList.length-1?'none':config.tableInBorder}};">
           <view class="txt" data-value="{{item}}"

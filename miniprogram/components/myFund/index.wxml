@@ -9,11 +9,11 @@
     bind:getCurrentValue="getCurrentValue">
     </table>
   </view>
-  <view wx:if="{{fundList.length>0}}" class="footer-bar">
-    <view>
+  <view wx:if="{{fundList.length>0}}" class="footer-bar" style="margin-bottom:{{needAdapt?80:60}}rpx;">
+    <view class="footer-bar-label">
       <text class="footer-bar-txt">今日预估总收益：</text>
       <text class="footer-bar-txt">￥10000</text>
     </view>
-    <view class="add-fund-footer" hover-class="add-fund-footer-hover" bindtap="addFund">添加</view>
+    <view class="add-fund-footer" hover-class="add-fund-footer-hover" bindtap="addFund">加自选</view>
   </view>
 </view>

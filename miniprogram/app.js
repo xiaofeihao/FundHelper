@@ -17,8 +17,20 @@ App({
 
     this.globalData = {
       fundCodes: '',
-      fundShare: {}
+      fundShare: {},
+      needAdapt: false
     }
+
+    let _this = this;
+    wx.getSystemInfo({
+      success: res => {
+        console.log(res)
+        if(res.safeArea.top > 20){
+          console.log('需要适配')
+          _this.globalData.needAdapt = true
+        }
+      }
+    })
   },
   onShow: function() {
     wx.showLoading({

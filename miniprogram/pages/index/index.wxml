@@ -2,16 +2,13 @@
 <view class="page">
 
   <view class='item-parent'>
-    <view wx:for='{{titles}}' class="title-item {{current == index ? 'active' : ''}}" wx:key='unique'
-      bindtap='taptab' data-index='{{index}}'>{{item}}</view>
+    <view wx:for='{{titles}}' class="title-item {{current == index ? 'active' : ''}}" wx:key='unique' bindtap='taptab'
+      data-index='{{index}}'>{{item}}</view>
   </view>
 
-  <swiper current='{{current}}' bindchange="bindChange"
-  style='height:{{contentheight}}px'>
+  <swiper current='{{current}}' bindchange="bindChange" style='height:{{contentheight}}px'>
     <swiper-item>
-      <scroll-view style='height:100%' scroll-y>
-        <myFund contentHeight="{{contentheight}}" fundList="{{fundData}}" isLoading="{{isLoading}}"/>
-      </scroll-view>
+      <myFund contentHeight="{{contentheight}}" fundList="{{fundData}}" needAdapt="{{needAdapt}}"/>
     </swiper-item>
     <swiper-item>
       <text>热点</text>

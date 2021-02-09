@@ -8,7 +8,7 @@ Page({
     current: 0,
     contentHeight: 0,
     fundData: [],
-    showLoading: true
+    needAdapt: false
   },
 
   taptab(e) {
@@ -29,7 +29,7 @@ Page({
     var contentH = wx.getSystemInfoSync().windowHeight - 55 / 750 * wx.getSystemInfoSync().windowWidth;
     this.setData({
       contentheight: contentH,
-      isLoading: app.globalData.isLoading
+      needAdapt: app.globalData.needAdapt
     });
   },
 

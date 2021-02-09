@@ -6,7 +6,7 @@
 
 .table {
   /* border: 2rpx solid #ebeef5; */
-  /* border-bottom: 2rpx solid #ebeef5; */
+  border-bottom: 2rpx solid #ebeef5;
   border-radius: 0;
   box-sizing: border-box;
   background: #fff;

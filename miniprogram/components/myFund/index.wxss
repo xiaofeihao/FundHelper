@@ -3,6 +3,7 @@
   display: flex;
   padding: 16rpx;
   height: 100%;
+  flex-direction: column;
 }
 
 .container {
@@ -11,6 +12,7 @@
 .table {
   width: 100%;
   margin: 10rpx auto 30rpx;
+  flex: 1;
 }
 
 .add-fund {
@@ -27,13 +29,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 30rpx;
-  background-color: #ebeef5;
-  position: absolute;
-  bottom: 0;
-  margin-bottom: 20rpx;
   width: 100%;
-  left: 0;
 }
 
 .footer-bar-txt {
@@ -67,4 +63,9 @@
   margin-right: 10rpx;
   opacity: 0.9;
   color: red;
+}
+
+.footer-bar-label {
+  display: flex;
+  flex-direction: column;
 }

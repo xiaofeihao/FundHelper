@@ -7,7 +7,7 @@
         <view class="txt" style="text-align:{{config.theadAlign}};width:{{item.width}}rpx">{{item.label}}</view>
       </view>
     </view>
-    <scroll-view scroll-y style="height:{{config.tbodyHeight}}px;">
+    <scroll-view scroll-y style="max-height:{{config.tbodyHeight}}px;">
       <view class="tr" wx:for="{{fundList}}" wx:for-item="item" wx:key="index"
         style="min-height:{{config.trHeight}}rpx;background:{{config.tbodyBgColor}};">
         <view class="td" wx:for="{{column}}" wx:for-item="col" wx:for-index="colIndex" wx:key="colIndex"

@@ -25,7 +25,8 @@ Component({
     fundList: {
       type: Array,
       value: []
-    }
+    },
+    needAdapt: Boolean
   },
 
   /**
@@ -71,6 +72,9 @@ Component({
     },
     'fundList': function(list) {
       console.log('list = ', list);
+    },
+    'needAdapt': function(needAdapt) {
+      console.log('needAdapt = ', needAdapt);
     }
   },
 

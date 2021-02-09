@@ -1,0 +1,19 @@
+<!--components/myFund/index.wxml-->
+<view class="page">
+  <view class='add-fund' wx:if="{{!fundCodes}}" style="margin-top:{{!fundCodes ? 150:0}}rpx">添加自选基金</view>
+  <view wx:if="{{!!fundCodes}}" class="table">
+    <table fundList="{{fundList}}" 
+    columns="{{columns}}"
+    setting="{{setting}}"
+    contentHeight="{{contentHeight}}"
+    bind:getCurrentValue="getCurrentValue">
+    </table>
+  </view>
+  <view wx:if="{{!!fundCodes}}" class="footer-bar">
+    <view>
+      <text class="footer-bar-txt">今日预估总收益：</text>
+      <text class="footer-bar-txt">￥10000</text>
+    </view>
+    <view class="add-fund-footer" hover-class="add-fund-footer-hover" bindtap="addFund">添加</view>
+  </view>
+</view>

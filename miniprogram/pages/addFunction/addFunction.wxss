@@ -1,0 +1,46 @@
+/* pages/addFunction/addFunction.wxss */
+
+/* @import "../../style/guide.wxss"; */
+
+.container {
+  background-color: white;
+  padding: 10rpx 20rpx;
+}
+
+.form {
+  width: 100%;
+}
+
+.form-tr {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30rpx;
+}
+
+.form-label {
+  color: black;
+  font-weight: 500;
+}
+
+.form-input {
+  border-width: 1px;
+  border-radius: 8rpx;
+  border-color:#ededed;
+  height: 50rpx;
+  border-style: solid;
+  flex: 1;
+  margin-left: 20rpx;
+  font-size: 28rpx;
+  padding: 0 20rpx;
+}
+
+.fund-preview {
+  font-size: 26rpx;
+  margin-left: 150rpx;
+}
+
+.form-btn {
+  margin-top: 100rpx;
+}

@@ -1,0 +1,16 @@
+<!--pages/addFunction/addFunction.wxml-->
+<view class="container" style="height:{{contentHeight}}px">
+  <form bindsubmit="formSubmit" class="form">
+    <view class="form-tr">
+      <text class="form-label">基金代码</text>
+      <input name="fundCode" class="form-input" auto-focus placeholder="必填" bindinput="bindInput" type="number" maxlength="6"/>
+    </view>
+    <text wx:if="{{!!fundNamePreview}}" class="fund-preview" style="color:{{error?'red':'#202020'}}">{{fundNamePreview}}</text>
+    <view class="form-tr">
+      <text class="form-label">持仓份额</text>
+      <input name="fundShare" class="form-input" placeholder="选填"/>
+    </view>
+    <button class="form-btn" form-type="submit" type="primary" disabled="{{error}}">添加</button>
+  </form>
+
+</view>

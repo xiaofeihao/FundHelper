@@ -1,0 +1,26 @@
+/**index.wxss**/
+.page {
+  display: flex;
+  flex-direction: column;
+  background: white;
+}
+.item-parent {
+  display: flex;
+  flex-direction: row;
+  margin-right: 30%;
+}
+.title-item {
+  text-align: center;
+  margin-left: 15rpx;
+  margin-right: 15rpx;
+  display: flex;
+  flex-direction: row;
+  font-size: 30rpx;
+  align-items: flex-end;
+  color: gray;
+}
+
+.title-item.active {
+  font-size: 40rpx;
+  color: red;
+}

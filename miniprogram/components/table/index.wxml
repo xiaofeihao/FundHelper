@@ -1,0 +1,30 @@
+<wxs src="../../utils/common.wxs" module="filter" />
+<view class="container">
+  <view wx:if="{{!!fundCodes}}" class='table'>
+    <view class='thead'>
+      <view class="th" wx:for="{{column}}" wx:key="index"
+        style="flex-grow:0;flex-basis:{{headWidth=='100%'?(100/column.length)+'%':item.width+'rpx'}};color:{{config.theadColor}};font-size:{{config.theadFontSize}}rpx;font-weight:{{config.theadFontWeight}};border-right:{{index==(column.length - 1)?'none':(config.tableInBorderLevel?'none':config.tableInBorder)}};border-bottom:{{config.tableInBorder}};">
+        <view class="txt" style="text-align:{{config.theadAlign}};width:{{item.width}}rpx">{{item.label}}</view>
+      </view>
+    </view>
+    <scroll-view scroll-y style="height:{{config.tbodyHeight}}px;">
+      <view class="tr" wx:for="{{fundList}}" wx:for-item="item" wx:key="index"
+        style="min-height:{{config.trHeight}}rpx;background:{{config.tbodyBgColor}};">
+        <view class="td" wx:for="{{column}}" wx:for-item="col" wx:for-index="colIndex" wx:key="colIndex"
+          style="flex-grow:0;flex-basis:{{headWidth=='100%'?(100/column.length)+'%':col.width+'rpx'}};color:{{config.tbodyColor}};font-size:{{config.tbodyFontSize}}rpx;font-weight:{{config.tbodyFontWeight}};border-right:{{colIndex==(column.length - 1)?'none':(config.tableInBorderLevel?'none':config.tableInBorder)}};border-bottom:{{index==fundList.length-1?'none':config.tableInBorder}};">
+          <view class="txt" data-value="{{item}}"
+            style="text-align:{{config.tbodyAlign}};font-size:{{col.fontSize}}rpx;font-weight:{{col.fontWeight}};text-decoration:{{col.textDecoration}};width:{{col.width}}rpx">
+            <block wx:if="{{!!col.type}}">
+              <text style="color:{{!item[col.prop] ? 'gray' : (item[col.prop]<0 ?'green':'red')}}">
+                {{filter[col.type](item[col.prop], col.param)}}\n{{item[col.subProp]}}\n</text>
+              <text>{{filter['date'](item[col.date])}}
+              </text></block>
+            <block wx:else><text>
+                {{item[col.prop]}}\n{{item[col.subProp]}}
+              </text></block>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

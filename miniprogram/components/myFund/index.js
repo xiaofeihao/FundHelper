@@ -42,7 +42,7 @@ Component({
       { label: '基金名称', width: 220, prop: 'name', subProp: 'id'},
       { label: '实时估值', width: 100, prop: 'expectGrowth', type: 'percent', subProp: 'expectWorth', date: 'expectWorthDate'},
       { label: '最新净值', width: 100, prop: 'dayGrowth', type: 'percent', subProp: 'netWorth', date: 'netWorthDate'},
-      { label: '估算收益', width: 150, prop: 'income'}
+      { label: '估算收益', width: 150, prop: 'income', type: 'income'}
     ],
     setting: {
       tableRadius: 0, // 表格圆角
@@ -73,7 +73,7 @@ Component({
       })
     },
     'fundList': function(list) {
-      console.log('=====hxf list = '+list)
+      console.log(list)
     }
   },
 
@@ -82,7 +82,6 @@ Component({
    */
   methods: {
     addFund: function() {
-      console.log('addddddd')
       wx.navigateTo({
         url: '/pages/addFunction/addFunction',
       })

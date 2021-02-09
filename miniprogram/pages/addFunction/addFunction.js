@@ -51,8 +51,8 @@ Page({
   },
 
   formSubmit: function(e) {
-    console.log(e.detail.value)
     var fundCode = e.detail.value.fundCode;
+    var fundShare = e.detail.value.fundShare;
     var fundCodes = globalData.fundCodes;
     if(!!fundCodes) {
       var fundArray = fundCodes.split(',');
@@ -61,6 +61,11 @@ Page({
         fundArray.push(fundCode);
         var newCodes = fundArray.join(',');
         globalData.fundCodes = newCodes;
+        if(fundShare > 0){
+          globalData.fundShare[fundCode] = Number(fundShare);
+        }else{
+          globalData.fundShare[fundCOde] = 0;
+        }
         wx.showToast({
           title: '添加成功',
           success: function(){

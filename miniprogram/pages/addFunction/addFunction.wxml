@@ -8,7 +8,7 @@
     <text wx:if="{{!!fundNamePreview}}" class="fund-preview" style="color:{{error?'red':'#202020'}}">{{fundNamePreview}}</text>
     <view class="form-tr">
       <text class="form-label">持仓份额</text>
-      <input name="fundShare" class="form-input" placeholder="选填"/>
+      <input name="fundShare" class="form-input" placeholder="选填" type="number"/>
     </view>
     <button class="form-btn" form-type="submit" type="primary" disabled="{{error}}">添加</button>
   </form>

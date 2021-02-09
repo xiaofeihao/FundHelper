@@ -34,7 +34,8 @@ Page({
   onShow: function () {
     console.log('====hxf onShow')
     var fundCodes = app.globalData.fundCodes;
-    console.log(fundCodes)
+    var fundShare = app.globalData.fundShare;
+    console.log(fundShare)
     if (!fundCodes) {
       return;
     }
@@ -51,9 +52,13 @@ Page({
         fundItem.expectGrowth = item.expectGrowth; // 估算涨幅
         fundItem.expectWorth = item.expectWorth; // 估算净值
         fundItem.expectWorthDate = item.expectWorthDate; // 估算净值日期
+        if (!!fundShare[item.code]) {
+          fundItem.income = (fundShare[item.code] * Number(item.expectGrowth) * Number(item.expectWorth) / (100 + Number(item.expectGrowth))).toFixed(2);
+        } else {
+          fundItem.income = 0;
+        }
         fundList.push(fundItem);
       });
-      console.log('getFundInfo ===== '+fundList)
       _this.setData({
         fundData: fundList
       })

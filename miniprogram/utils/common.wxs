@@ -108,7 +108,16 @@ function date(val) {
   return day.split('-')[1]+'-' + day.split('-')[2];
 }
 
+function income(val) {
+  if(val < 0){
+    return '-'+val;
+  }else{
+    return val;
+  }
+}
+
 module.exports.time = time;
 module.exports.price = price;
 module.exports.percent = percent;
 module.exports.date = date;
+module.exports.income = income;

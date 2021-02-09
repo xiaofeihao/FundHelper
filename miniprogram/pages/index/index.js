@@ -91,6 +91,10 @@ Page({
       success(res) {
         if (res.tapIndex === 0) {
           // 查看详情
+          wx.showToast({
+            title: '即将上线，敬请期待',
+            icon: 'none'
+          });
         } else if (res.tapIndex === 1) {
           // 修改持仓
           _this.changeFund(editFund);

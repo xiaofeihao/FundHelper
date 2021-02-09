@@ -7,7 +7,8 @@ Page({
     titles: ['自选', '行情', '推荐'],
     current: 0,
     contentHeight: 0,
-    fundData: []
+    fundData: [],
+    showLoading: true
   },
 
   taptab(e) {
@@ -27,16 +28,19 @@ Page({
     console.log('====hxf onLoad')
     var contentH = wx.getSystemInfoSync().windowHeight - 55 / 750 * wx.getSystemInfoSync().windowWidth;
     this.setData({
-      contentheight: contentH
-    })
+      contentheight: contentH,
+      isLoading: app.globalData.isLoading
+    });
   },
 
   onShow: function () {
     console.log('====hxf onShow')
     var fundCodes = app.globalData.fundCodes;
     var fundShare = app.globalData.fundShare;
-    console.log(fundShare)
+    console.log(fundCodes, fundShare)
     if (!fundCodes) {
+      console.log('没有自选基金')
+      wx.hideLoading();
       return;
     }
     var _this = this;
@@ -59,6 +63,7 @@ Page({
         }
         fundList.push(fundItem);
       });
+      wx.hideLoading();
       _this.setData({
         fundData: fundList
       })

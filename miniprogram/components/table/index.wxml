@@ -1,6 +1,6 @@
 <wxs src="../../utils/common.wxs" module="filter" />
 <view class="container">
-  <view wx:if="{{!!fundCodes}}" class='table'>
+  <view class='table'>
     <view class='thead'>
       <view class="th" wx:for="{{column}}" wx:key="index"
         style="flex-grow:0;flex-basis:{{headWidth=='100%'?(100/column.length)+'%':item.width+'rpx'}};color:{{config.theadColor}};font-size:{{config.theadFontSize}}rpx;font-weight:{{config.theadFontWeight}};border-right:{{index==(column.length - 1)?'none':(config.tableInBorderLevel?'none':config.tableInBorder)}};border-bottom:{{config.tableInBorder}};">

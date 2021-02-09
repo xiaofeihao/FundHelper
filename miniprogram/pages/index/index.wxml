@@ -10,7 +10,7 @@
   style='height:{{contentheight}}px'>
     <swiper-item>
       <scroll-view style='height:100%' scroll-y>
-        <myFund contentHeight="{{contentheight}}" fundList="{{fundData}}"/>
+        <myFund contentHeight="{{contentheight}}" fundList="{{fundData}}" isLoading="{{isLoading}}"/>
       </scroll-view>
     </swiper-item>
     <swiper-item>

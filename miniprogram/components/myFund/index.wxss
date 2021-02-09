@@ -2,6 +2,7 @@
 .page {
   display: flex;
   padding: 16rpx;
+  height: 100%;
 }
 
 .container {
@@ -17,7 +18,7 @@
   border-width: 0.5rpx;
   border-color: gray;
   border-radius: 40rpx;
-  height: 80rpx;
+  padding: 20rpx 20rpx;
   align-items: center;
   justify-content: center;
 }

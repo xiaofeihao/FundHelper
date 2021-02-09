@@ -50,37 +50,60 @@ Page({
     }
   },
 
-  formSubmit: function(e) {
+  formSubmit: function (e) {
     var fundCode = e.detail.value.fundCode;
     var fundShare = e.detail.value.fundShare;
     var fundCodes = globalData.fundCodes;
-    if(!!fundCodes) {
+    if (!!fundCodes) {
       var fundArray = fundCodes.split(',');
-      if(!fundArray.includes(fundCode)){
-        console.log(fundArray);
+      if (!fundArray.includes(fundCode)) {
         fundArray.push(fundCode);
         var newCodes = fundArray.join(',');
         globalData.fundCodes = newCodes;
-        if(fundShare > 0){
+        if (!!fundShare && fundShare > 0) {
           globalData.fundShare[fundCode] = Number(fundShare);
-        }else{
+        } else {
           globalData.fundShare[fundCOde] = 0;
         }
-        wx.showToast({
-          title: '添加成功',
-          success: function(){
-            wx.navigateBack()
-          }
-        })
-      }else{
+        console.log(newCodes, globalData.fundShare)
+        this.storeGlobalData();
+      } else {
         wx.showToast({
           title: '该基金已在自选列表',
           icon: 'none'
         })
       }
-    }else{
-      globalData.fundCodes = newCodes;
+    } else {
+      globalData.fundCodes = fundCode;
+      if (!!fundShare && Number(fundShare) > 0) {
+        globalData.fundShare[fundCode] = fundShare;
+      } else {
+        globalData.fundShare[fundCode] = 0;
+      }
+      this.storeGlobalData();
     }
+  },
+
+  storeGlobalData: function () {
+    wx.setStorage({
+      data: globalData.fundCodes,
+      key: 'fundCodes',
+    });
+    wx.setStorage({
+      data: globalData.fundShare,
+      key: 'fundShare',
+    });
+    wx.showLoading({
+      title: '正在添加',
+      success: function () {
+        wx.showToast({
+          title: '添加成功',
+          success: function () {
+            wx.navigateBack()
+          }
+        })
+      }
+    });
   }
 
 })

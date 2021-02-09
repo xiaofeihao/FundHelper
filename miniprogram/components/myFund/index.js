@@ -1,5 +1,3 @@
-// import netUtil from '../../network/netManager.js';
-var appInstance = getApp();
 // components/myFund/index.js
 Component({
   /**
@@ -34,7 +32,6 @@ Component({
    * 组件的初始数据
    */
   data: {
-    fundCodes: '1234',
     // 表格数据
     fundList: [],
     // 表格标题列
@@ -70,10 +67,10 @@ Component({
     'contentHeight': function(height) {
       this.setData({
         setting: {...this.data.setting, tbodyHeight: height-100}
-      })
+      });
     },
     'fundList': function(list) {
-      console.log(list)
+      console.log('list = ', list);
     }
   },
 

@@ -95,6 +95,9 @@ Component({
       console.log('点击回调', value.detail)
       var editFund = value.detail;
       this.triggerEvent('fundEditAction', editFund)
+    },
+    refresh: function() {
+      this.triggerEvent('refreshFund');
     }
   }
 })

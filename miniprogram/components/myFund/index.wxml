@@ -15,6 +15,9 @@
       <text class="footer-bar-txt-label">今日预估总收益：</text>
       <text class="footer-bar-txt" style="color:{{!totalIncome ? '#1b1f23' : (totalIncome > 0 ? 'red' : 'green')}}">￥{{totalIncome}}</text>
     </view>
-    <view class="add-fund-footer" hover-class="add-fund-footer-hover" bindtap="addFund">加自选</view>
+    <view class='footer-btn-con'>
+      <view class="add-fund-footer" hover-class="add-fund-footer-hover" bindtap="addFund">加自选</view>
+      <view class="add-fund-footer" hover-class="add-fund-footer-hover" bindtap="refresh">刷新</view>
+    </view>
   </view>
 </view>

@@ -12,10 +12,13 @@
       fundList="{{fundData}}" 
       needAdapt="{{needAdapt}}" 
       totalIncome="{{totalIncome}}"
-      bind:fundEditAction="fundEditAction"/>
+      bind:fundEditAction="fundEditAction"
+      bind:refreshFund="refreshFund"/>
     </swiper-item>
     <swiper-item>
-      <text>热点</text>
+      <quatation current="{{current}}"
+      contentWidth="{{contentWidth}}"
+      contentHeight="{{contentheight}}"/>
     </swiper-item>
     <swiper-item>
       <text>推荐</text>

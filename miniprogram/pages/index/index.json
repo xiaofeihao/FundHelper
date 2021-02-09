@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "myFund": "../../components/myFund/index"
+    "myFund": "../../components/myFund/index",
+    "quatation": "../../components/quotation/index"
   }
 }

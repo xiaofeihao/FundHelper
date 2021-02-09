@@ -1,0 +1,25 @@
+<!--components/quotation/index.wxml-->
+<view class="container">
+  <scroll-view scroll-y style="max-height:{{contentHeight-70}}px">
+    <view class="rank-label">大盘信息</view>
+    <view class="board-container">
+      <view class="board-item" wx:for="{{boardData}}" wx:for-item="item" style="width:{{(contentWidth - 60)/3}}px" wx:key="index">
+        <text class="board-label">{{item.name}}</text>
+        <text class="board-num" style="color:{{item.changePercent>0?'#D9292D':'#399C35'}}">{{item.price}}</text>
+        <text class="board-percent"
+          style="color:{{item.changePercent>0?'#D9292D':'#399C35'}}">{{item.changePercent}}%</text>
+      </view>
+    </view>
+    <text class="rank-label">版块涨跌</text>
+    <view class="board-container">
+      <view class="board-item" wx:for="{{rankData}}" wx:for-item="item" style="width:{{(contentWidth - 60)/3}}px" wx:key="index">
+        <text class="board-label">{{item.name}}</text>
+        <text class="board-num"
+          style="color:{{item.changePercent>0?'#D9292D':'#399C35'}}">{{item.changePercent}}%</text>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="refresh-btn" bindtap="refresh" hover-class="refresh-btn-hover">
+      刷新
+  </view>
+</view>

@@ -21,7 +21,6 @@
       contentHeight="{{contentheight}}"/>
     </swiper-item>
     <swiper-item>
-      <text>推荐</text>
     </swiper-item>
   </swiper>
 

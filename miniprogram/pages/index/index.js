@@ -28,22 +28,28 @@ Page({
   onLoad: function () {
     console.log('====hxf onLoad')
     var contentH = wx.getSystemInfoSync().windowHeight - 55 / 750 * wx.getSystemInfoSync().windowWidth;
+    var contentW = wx.getSystemInfoSync().windowWidth;
     this.setData({
       contentheight: contentH,
-      needAdapt: app.globalData.needAdapt
+      needAdapt: app.globalData.needAdapt,
+      contentWidth: contentW
     });
   },
 
   onShow: function () {
     console.log('====hxf onShow')
     var fundCodes = app.globalData.fundCodes;
-    var fundShare = app.globalData.fundShare;
-    console.log(fundCodes, fundShare)
     if (!fundCodes) {
       console.log('没有自选基金')
       wx.hideLoading();
       return;
     }
+    this.refreshFund();
+  },
+
+  refreshFund: function () {
+    var fundCodes = app.globalData.fundCodes;
+    var fundShare = app.globalData.fundShare;
     var _this = this;
     getFundInfo(fundCodes, function (data) {
       const fundList = []
@@ -155,8 +161,8 @@ Page({
         }
       }
     })
-    
-    
+
+
   },
 
   /**
@@ -177,7 +183,7 @@ Page({
           console.log('修改成功：' + res.content);
           var newShare = Number(res.content);
           console.log(newShare)
-          if(isNaN(newShare) || newShare < 0){
+          if (isNaN(newShare) || newShare < 0) {
             wx.showToast({
               title: '输入不合法',
               icon: 'error'
@@ -188,7 +194,7 @@ Page({
           fundShare[code] = newShare;
           var fundData = _this.data.fundData;
           fundData.forEach(item => {
-            if(item.id === code) {
+            if (item.id === code) {
               item.income = (newShare * Number(item.expectGrowth) * Number(item.expectWorth) / (100 + Number(item.expectGrowth))).toFixed(2);
             }
           });

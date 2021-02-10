@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "myFund": "../../components/myFund/index",
-    "quatation": "../../components/quotation/index"
+    "quatation": "../../components/quotation/index",
+    "xmodal": "../../components/xmodal/index"
   }
 }

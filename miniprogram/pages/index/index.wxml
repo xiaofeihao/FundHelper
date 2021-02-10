@@ -9,7 +9,7 @@
   <swiper current='{{current}}' bindchange="bindChange" style='height:{{contentheight}}px'>
     <swiper-item>
       <myFund contentHeight="{{contentheight}}" 
-      fundList="{{fundData}}" 
+      fundList="{{fundData}}"
       needAdapt="{{needAdapt}}" 
       totalIncome="{{totalIncome}}"
       fundCodes="{{fundCodes}}"
@@ -21,10 +21,19 @@
       contentWidth="{{contentWidth}}"
       contentHeight="{{contentheight}}"
       boardData="{{boardData}}"
-      rankData="{{rankData}}"/>
+      rankData="{{rankData}}"
+      needAdapt="{{needAdapt}}" />
     </swiper-item>
-    <swiper-item>
-    </swiper-item>
+    <!-- <swiper-item>
+    </swiper-item> -->
   </swiper>
-
+  <xmodal 
+    wx:if="{{showModal}}"
+    modalTitle="{{changeShareTitle}}"
+    placeholder="{{sharePlaceholder}}"
+    confirmText="确定"
+    cancelText="取消"
+    bind:onConfirm="onConfirm"
+    bind:onCancel="onCancel"
+  />
 </view>

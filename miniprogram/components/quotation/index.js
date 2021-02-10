@@ -23,7 +23,8 @@ Component({
     contentWidth: Number,
     contentHeight: Number,
     boardData: Array,
-    rankData: Array
+    rankData: Array,
+    needAdapt: Boolean
   },
 
   observers: {

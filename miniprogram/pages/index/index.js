@@ -5,12 +5,13 @@ const app = getApp()
 
 Page({
   data: {
-    titles: ['自选', '行情', '推荐'],
+    titles: ['自选', '行情'],
     current: 0,
     contentHeight: 0,
     fundData: [],
     needAdapt: false,
-    fundCodes: ''
+    fundCodes: '',
+    showModal: false
   },
 
   taptab(e) {
@@ -38,7 +39,7 @@ Page({
     });
     var fundCodes = app.globalData.fundCodes;
     if (!fundCodes) {
-      console.log('没有自选基金')
+      this.refreshBoard();
       wx.hideLoading();
       return;
     }
@@ -87,7 +88,7 @@ Page({
     });
   },
 
-  refreshBoard: function() {
+  refreshBoard: function () {
     var _this = this;
     getBoardInfo(function (params) {
       _this.setData({
@@ -96,11 +97,11 @@ Page({
     }, function (error) {
       console.log('获取大盘失败 error: ', error);
     });
-    getRankInfo(function(params) {
+    getRankInfo(function (params) {
       _this.setData({
         rankData: params
       });
-    }, function(error) {
+    }, function (error) {
       console.log('获取版块失败 error: ', error);
     })
   },
@@ -193,33 +194,35 @@ Page({
     var name = editFund.name;
     var fundShare = app.globalData.fundShare;
     var _this = this;
-    wx.showModal({
-      title: `修改${name}持仓`,
-      placeholderText: `${fundShare[code]}`,
-      editable: true,
-      success(res) {
-        if (res.confirm) {
-          var newShare = Number(res.content);
-          if (isNaN(newShare) || newShare < 0) {
-            wx.showToast({
-              title: '输入不合法',
-              icon: 'error'
-            });
-            _this.changeFund(editFund);
-            return;
-          }
-          fundShare[code] = newShare;
-          var fundData = _this.data.fundData;
-          fundData.forEach(item => {
-            if (item.id === code) {
-              item.income = (newShare * Number(item.expectGrowth) * Number(item.expectWorth) / (100 + Number(item.expectGrowth))).toFixed(2);
-            }
-          });
-          _this.refreshData(fundData);
-          saveFund();
-        } else if (res.cancel) {
-        }
+    var changeTitle = `修改${name}持仓`;
+    var placeholder = fundShare[code];
+    this.setData({
+      showModal: true,
+      changeShareTitle: changeTitle,
+      sharePlaceholder: placeholder,
+      editCode: code
+    });
+  },
+  onConfirm: function (e) {
+    var newShare = Number(e.detail);
+    var code = this.data.editCode;
+    var fundShare = app.globalData.fundShare;
+    fundShare[code] = newShare;
+    var fundDatas = this.data.fundData;
+    fundDatas.forEach(item => {
+      if (item.id === code) {
+        item.income = (newShare * Number(item.expectGrowth) * Number(item.expectWorth) / (100 + Number(item.expectGrowth))).toFixed(2);
       }
+    });
+    this.refreshData(fundDatas);
+    saveFund();
+    this.setData({
+      showModal: false
+    });
+  },
+  onCancel: function (e) {
+    this.setData({
+      showModal: false
     });
   }
 

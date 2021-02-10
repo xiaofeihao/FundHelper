@@ -25,7 +25,6 @@ Page({
     if (fundCode.length === 6) {
       var _this = this;
       getFundInfo(fundCode, function (data) {
-        console.log(data)
         if (data.length > 0) {
           _this.setData({
             fundNamePreview: data[0].name,
@@ -66,7 +65,6 @@ Page({
         } else {
           globalData.fundShare[fundCode] = 0;
         }
-        console.log(newCodes, globalData.fundShare)
         this.saveGlobalData();
       } else {
         wx.showToast({
@@ -87,12 +85,14 @@ Page({
 
   saveGlobalData: function () {
     saveFund(globalData.fundCodes, globalData.fundShare);
+    const eventChannel = this.getOpenerEventChannel()
     wx.showLoading({
       title: '正在添加',
       success: function () {
         wx.showToast({
           title: '添加成功',
           success: function () {
+            eventChannel.emit('refreshList', {});
             wx.navigateBack()
           }
         })

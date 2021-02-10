@@ -36,12 +36,12 @@
 .td {
   border-bottom: 2rpx solid #ebeef5;
   display: flex;
-  padding-bottom: 20rpx;
-  padding-left: 10rpx;
+  padding: 20rpx 0;
 }
 .td .txt {
   text-align: left;
   font-weight: normal;
+  padding-left: 10rpx;
 }
 .msg {
   width: 750rpx;

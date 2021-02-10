@@ -1,0 +1,21 @@
+<!--components/xmodal/index.wxml-->
+<view class="container">
+
+  <view class="modal-body">
+    <view class="modal-title">
+      <text class="modal-title-txt">{{modalTitle}}</text>
+    </view>
+    <view class="modal-content">
+      <input placeholder="{{placeholder}}" class="modal-input" bindinput="inputChange" maxlength="10"/>
+    </view>
+    <view class="modal-footer">
+      <view class="modal-btn-ok" bindtap="onConfirmAction">
+        <text class="btn-txt">{{confirmText}}</text>
+      </view>
+      <view class="modal-btn-cancel" bindtap="onCancelAction">
+        <text class="btn-txt">{{cancelText}}</text>
+      </view>
+    </view>
+  </view>
+
+</view>

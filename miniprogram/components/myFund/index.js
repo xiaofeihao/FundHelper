@@ -35,14 +35,12 @@ Component({
    * 组件的初始数据
    */
   data: {
-    // 表格数据
-    fundList: [],
     // 表格标题列
     columns: [
       { label: '基金名称', width: 220, prop: 'name', subProp: 'id'},
       { label: '实时估值', width: 100, prop: 'expectGrowth', type: 'percent', subProp: 'expectWorth', date: 'expectWorthDate'},
       { label: '最新净值', width: 100, prop: 'dayGrowth', type: 'percent', subProp: 'netWorth', date: 'netWorthDate'},
-      { label: '估算收益', width: 150, prop: 'income', type: 'income'}
+      { label: '估算收益', width: 180, prop: 'income', type: 'income'}
     ],
     setting: {
       tableRadius: 0, // 表格圆角
@@ -79,12 +77,17 @@ Component({
    */
   methods: {
     addFund: function() {
+      var _this = this;
       wx.navigateTo({
         url: '/pages/addFunction/addFunction',
+        events: {
+          refreshList: function(data) {
+            _this.refresh();
+          }
+        }
       })
     },
     clickFundItem: function(value) {
-      console.log('点击回调', value.detail)
       var editFund = value.detail;
       this.triggerEvent('fundEditAction', editFund)
     },

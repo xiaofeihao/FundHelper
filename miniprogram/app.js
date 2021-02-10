@@ -13,50 +13,49 @@ App({
     //     traceUser: true,
     //   })
     // }
-    console.log('APP onLaunch')
+    console.log('life APP onLaunch')
 
     this.globalData = {
       fundCodes: '',
       fundShare: {},
       needAdapt: false
     }
-
-    let _this = this;
+    this.getBaseInfo();
+  },
+  onShow: function() {
+    console.log('life APP onShow')
+  },
+  getBaseInfo() {
+    wx.showLoading({
+      title: '正在加载...',
+    });
+    var _this = this;
     wx.getSystemInfo({
       success: res => {
-        console.log(res)
         if(res.safeArea.top > 20){
           console.log('需要适配')
           _this.globalData.needAdapt = true
         }
       }
-    })
-  },
-  onShow: function() {
-    wx.showLoading({
-      title: '正在加载...',
     });
-    var _this = this;
     wx.getStorage({
       key: 'fundCodes',
       success (res) {
-        console.log('====res fundcodes = ', res.data)
         if(res.data) {
           _this.globalData.fundCodes = res.data;
         }
       },
       fail (err) {
-        console.log('====res err = ', err);
+        console.log('获取fundCodes缓存失败， error = ', err);
       }
     });
     wx.getStorage({
       key: 'fundShare',
       success (res) {
-        console.log('====res fundshare = ', res.data)
         _this.globalData.fundShare = res.data;
       },
       fail(err) {
-        console.log('====res err = ', err)
+        console.log('获取fundShare缓存失败， error = ', err);
       }
     })
   }

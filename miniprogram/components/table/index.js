@@ -49,11 +49,7 @@ Component({
   },
 
   observers: {
-    'fundList': function(params) {
-      console.log(params)
-    },
     'columns': function(params) {
-      console.log(params)
       if (params.length !== 0) {
         let width = 0;
         let num = 0;
@@ -118,7 +114,6 @@ Component({
       this.triggerEvent("getCurrentValue", value)
     },
     itemAction: function(e) {
-      console.log('click Item ', e.currentTarget.dataset.value)
       var editFund = e.currentTarget.dataset.value;
       this.triggerEvent("clickFundItem", editFund)
     }

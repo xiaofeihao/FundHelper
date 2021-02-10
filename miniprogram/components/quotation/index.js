@@ -2,8 +2,17 @@
 const { getBoardInfo, getRankInfo } = require("../../network/netManager.js");
 Component({
   lifetimes: {
-    ready() {
-      console.log('行情 ready');
+    created: function () {
+      console.log('life 行情 created')
+    },
+    ready: function() {
+      console.log('life 行情 ready')
+    },
+    attached: function () {
+      console.log('life 行情 attacthed')
+    },
+    detached: function () {
+      console.log('life 行情 detached')
     }
   },
   /**
@@ -12,7 +21,9 @@ Component({
   properties: {
     current: Number,
     contentWidth: Number,
-    contentHeight: Number
+    contentHeight: Number,
+    boardData: Array,
+    rankData: Array
   },
 
   observers: {
@@ -36,23 +47,22 @@ Component({
    */
   methods: {
     refresh() {
-      var _this = this;
-      getBoardInfo(function (params) {
-        console.log('board ', params)
-        _this.setData({
-          boardData: params
-        });
-      }, function (error) {
-        console.log('error: ', error);
-      });
-      getRankInfo(function(params) {
-        console.log('rank ', params)
-        _this.setData({
-          rankData: params
-        });
-      }, function(error) {
-
-      })
+      // var _this = this;
+      // getBoardInfo(function (params) {
+      //   console.log('board ', params)
+      //   _this.setData({
+      //     boardData: params
+      //   });
+      // }, function (error) {
+      //   console.log('error: ', error);
+      // });
+      // getRankInfo(function(params) {
+      //   console.log('rank ', params)
+      //   _this.setData({
+      //     rankData: params
+      //   });
+      // }, function(error) {
+      // })
     }
   }
 })

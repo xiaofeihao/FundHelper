@@ -1,23 +1,22 @@
 <!--components/myFund/index.wxml-->
-<view class="page" style="justify-content:{{fundList.length<1 ? 'center' : 'flex-start'}};align-items:{{fundList.length<1 ? 'center' : 'flex-start'}}">
-  <view class='add-fund' wx:if="{{fundList.length<1}}" bindtap="addFund">添加自选基金</view>
+<view class="page" style="justify-content:{{!fundCodes && fundList.length<0 ? 'center' : 'flex-start'}};align-items:{{!fundCodes && fundList.length<0 ? 'center' : 'flex-start'}}">
+  <view class='add-fund' wx:if="{{!fundCodes && fundList.length<0}}" bindtap="addFund">添加自选基金</view>
   <view wx:if="{{fundList.length>0}}" class="table">
     <table fundList="{{fundList}}" 
     columns="{{columns}}"
     setting="{{setting}}"
     contentHeight="{{contentHeight}}"
     bind:getCurrentValue="getCurrentValue"
-    bind:clickFundItem="clickFundItem">
-    </table>
+    bind:clickFundItem="clickFundItem" />
   </view>
-  <view wx:if="{{fundList.length>0}}" class="footer-bar" style="margin-bottom:{{needAdapt?80:60}}rpx;">
+  <view wx:if="{{fundList.length>0}}" class="footer-bar" style="margin-bottom:{{needAdapt?80:30}}rpx;">
     <view class="footer-bar-label">
       <text class="footer-bar-txt-label">今日预估总收益：</text>
       <text class="footer-bar-txt" style="color:{{!totalIncome ? '#1b1f23' : (totalIncome > 0 ? 'red' : 'green')}}">{{!totalIncome ? '' : (totalIncome > 0 ? '+':'-')}}{{totalIncome}}</text>
     </view>
     <view class='footer-btn-con'>
-      <view class="add-fund-footer" hover-class="add-fund-footer-hover" bindtap="addFund">加自选</view>
-      <view class="add-fund-footer" hover-class="add-fund-footer-hover" bindtap="refresh">刷新</view>
+      <image src="../../images/refresh.png" class="footer-image2" bindtap="refresh" mode="aspectFit"/>
+      <image src="../../images/add.png" class="footer-image" bindtap="addFund"/>
     </view>
   </view>
 </view>

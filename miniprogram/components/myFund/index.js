@@ -5,22 +5,23 @@ Component({
    */
   lifetimes: {
     created: function () {
-      console.log('自选 created')
+      console.log('life 自选 created')
     },
     ready: function() {
-      console.log('自选 ready')
+      console.log('life 自选 ready')
     },
     attached: function () {
-      console.log('自选 attacthed')
+      console.log('life 自选 attacthed')
     },
     detached: function () {
-      console.log('自选 detached')
+      console.log('life 自选 detached')
     }
   },
   /**
    * 组件的属性列表
    */
   properties: {
+    fundCodes: String,
     contentHeight: Number,
     fundList: {
       type: Array,
@@ -70,15 +71,6 @@ Component({
       this.setData({
         setting: {...this.data.setting, tbodyHeight: height-130}
       });
-    },
-    'fundList': function(list) {
-      console.log('list = ', list);
-    },
-    'needAdapt': function(needAdapt) {
-      console.log('needAdapt = ', needAdapt);
-    },
-    'totalIncome': function(income) {
-      console.log('totalIncome = ', income);
     }
   },
 

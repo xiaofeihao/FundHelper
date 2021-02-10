@@ -1,5 +1,5 @@
 //index.js
-const { getFundInfo } = require("../../network/netManager.js");
+const { getFundInfo, getBoardInfo, getRankInfo } = require("../../network/netManager.js");
 const { saveFund } = require("../../utils/commonUtils.js");
 const app = getApp()
 
@@ -9,7 +9,8 @@ Page({
     current: 0,
     contentHeight: 0,
     fundData: [],
-    needAdapt: false
+    needAdapt: false,
+    fundCodes: ''
   },
 
   taptab(e) {
@@ -26,18 +27,15 @@ Page({
   },
 
   onLoad: function () {
-    console.log('====hxf onLoad')
+    console.log('life 首页 onLoad')
     var contentH = wx.getSystemInfoSync().windowHeight - 55 / 750 * wx.getSystemInfoSync().windowWidth;
     var contentW = wx.getSystemInfoSync().windowWidth;
     this.setData({
       contentheight: contentH,
       needAdapt: app.globalData.needAdapt,
-      contentWidth: contentW
+      contentWidth: contentW,
+      fundCodes: app.globalData.fundCodes
     });
-  },
-
-  onShow: function () {
-    console.log('====hxf onShow')
     var fundCodes = app.globalData.fundCodes;
     if (!fundCodes) {
       console.log('没有自选基金')
@@ -45,6 +43,11 @@ Page({
       return;
     }
     this.refreshFund();
+    this.refreshBoard();
+  },
+
+  onShow: function () {
+    console.log('life 首页 onShow')
   },
 
   refreshFund: function () {
@@ -80,16 +83,33 @@ Page({
         totalIncome: totalIncome.toFixed(2)
       })
     }, function (error) {
-      console.log(error)
+      console.log('获取基金信息失败 error = ', error)
     });
   },
 
+  refreshBoard: function() {
+    var _this = this;
+    getBoardInfo(function (params) {
+      _this.setData({
+        boardData: params
+      });
+    }, function (error) {
+      console.log('获取大盘失败 error: ', error);
+    });
+    getRankInfo(function(params) {
+      _this.setData({
+        rankData: params
+      });
+    }, function(error) {
+      console.log('获取版块失败 error: ', error);
+    })
+  },
+
   onReady: function () {
-    console.log('====hxf onReady')
+    console.log('life 首页 onReady')
   },
 
   fundEditAction: function (value) {
-    console.log('页面回调 ', value);
     var editFund = value.detail;
     var _this = this;
     wx.showActionSheet({
@@ -145,7 +165,6 @@ Page({
       success(res) {
         if (res.cancel) {
           // 因为弹框不支持按钮顺序，所以这里用原生的cancel代表确定删除
-          console.log('删除成功')
           if (fundCodes) {
             var fundArray = fundCodes.split(',');
             fundArray.splice(fundArray.indexOf(code), 1);
@@ -157,7 +176,7 @@ Page({
             saveFund();
           }
         } else if (res.confirm) {
-          console.log('取消删除')
+
         }
       }
     })
@@ -180,9 +199,7 @@ Page({
       editable: true,
       success(res) {
         if (res.confirm) {
-          console.log('修改成功：' + res.content);
           var newShare = Number(res.content);
-          console.log(newShare)
           if (isNaN(newShare) || newShare < 0) {
             wx.showToast({
               title: '输入不合法',
@@ -201,7 +218,6 @@ Page({
           _this.refreshData(fundData);
           saveFund();
         } else if (res.cancel) {
-          console.log('取消修改');
         }
       }
     });

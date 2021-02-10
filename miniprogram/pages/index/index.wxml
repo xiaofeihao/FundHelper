@@ -12,13 +12,16 @@
       fundList="{{fundData}}" 
       needAdapt="{{needAdapt}}" 
       totalIncome="{{totalIncome}}"
+      fundCodes="{{fundCodes}}"
       bind:fundEditAction="fundEditAction"
       bind:refreshFund="refreshFund"/>
     </swiper-item>
     <swiper-item>
       <quatation current="{{current}}"
       contentWidth="{{contentWidth}}"
-      contentHeight="{{contentheight}}"/>
+      contentHeight="{{contentheight}}"
+      boardData="{{boardData}}"
+      rankData="{{rankData}}"/>
     </swiper-item>
     <swiper-item>
     </swiper-item>

@@ -8,13 +8,16 @@
 
   <swiper current='{{current}}' bindchange="bindChange" style='height:{{contentheight}}px'>
     <swiper-item>
-      <myFund contentHeight="{{contentheight}}" 
+      <myFund current="{{current}}"
+      contentHeight="{{contentheight}}" 
       fundList="{{fundData}}"
       needAdapt="{{needAdapt}}" 
       totalIncome="{{totalIncome}}"
       fundCodes="{{fundCodes}}"
       bind:fundEditAction="fundEditAction"
-      bind:refreshFund="refreshFund"/>
+      bind:refreshFund="refreshFund"
+      bind:startRepeat="startRepeat"
+      bind:stopRepeat="stopRepeat"/>
     </swiper-item>
     <swiper-item>
       <quatation current="{{current}}"

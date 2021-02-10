@@ -1,6 +1,6 @@
 //index.js
 const { getFundInfo, getBoardInfo, getRankInfo } = require("../../network/netManager.js");
-const { saveFund } = require("../../utils/commonUtils.js");
+const { saveFund, isDealTime } = require("../../utils/commonUtils.js");
 const app = getApp()
 
 Page({
@@ -15,16 +15,19 @@ Page({
   },
 
   taptab(e) {
-    var index = e.currentTarget.dataset.index
+    var index = e.currentTarget.dataset.index;
     this.setData({
       current: index
     })
   },
   //此函数后面会用到
   bindChange(e) {
-    this.setData({
-      current: e.detail.current
-    })
+    var c = e.detail.current;
+    if (c !== this.data.current) {
+      this.setData({
+        current: e.detail.current
+      })
+    }
   },
 
   onLoad: function () {
@@ -49,9 +52,16 @@ Page({
 
   onShow: function () {
     console.log('life 首页 onShow')
+    this.stopRepeat();
+    this.startRepeat();
   },
 
-  refreshFund: function () {
+  onHide: function() {
+    console.log('life 首页 onHide')
+    this.stopRepeat();
+  },
+
+  refreshFund: function (next) {
     var fundCodes = app.globalData.fundCodes;
     var fundShare = app.globalData.fundShare;
     var _this = this;
@@ -83,9 +93,37 @@ Page({
         fundData: fundList,
         totalIncome: totalIncome.toFixed(2)
       })
+      if(!!next && typeof next == 'function'){
+        next();
+      }
     }, function (error) {
       console.log('获取基金信息失败 error = ', error)
     });
+  },
+
+  startRepeat: function() {
+    if(!isDealTime()){
+      console.log('非交易时间');
+      return;
+    }
+    if(!app.globalData.fundCodes){
+      return;
+    }
+    var _this = this;
+    var timeoutNumber = setTimeout(function () {
+      _this.refreshFund(function () {
+        _this.startRepeat();
+      });
+    }, 2000);
+    this.setData({
+      timeoutNumber
+    });
+  },
+
+  stopRepeat: function() {
+    if(this.data.timeoutNumber) {
+      clearTimeout(this.data.timeoutNumber);
+    }
   },
 
   refreshBoard: function () {

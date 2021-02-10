@@ -1,3 +1,5 @@
+const { isDealTime } = require("../../utils/commonUtils")
+
 // components/myFund/index.js
 Component({
   /**
@@ -21,6 +23,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    current: Number,
     fundCodes: String,
     contentHeight: Number,
     fundList: {
@@ -69,6 +72,13 @@ Component({
       this.setData({
         setting: {...this.data.setting, tbodyHeight: height-130}
       });
+    },
+    'current': function (index) {
+      if (index === 0) {
+        this.triggerEvent('startRepeat');
+      } else {
+        this.triggerEvent('stopRepeat');
+      }
     }
   },
 

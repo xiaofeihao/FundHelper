@@ -6,7 +6,7 @@
       <image class="refresh-icon" src="../../images/refresh.png" bindtap="refresh"/>
     </view>
     <view wx:if="{{boardData.length<=0}}">
-      正在加载
+      正在加载...
     </view>
     <view class="board-container">
       <view class="board-item" wx:for="{{boardData}}" wx:for-item="item" style="width:{{(contentWidth - 60)/3}}px" wx:key="index">

@@ -112,14 +112,18 @@ Component({
       var theBestRate = -100;
       var totalPrice = 0;
       this.data.fundList.forEach(value => {
-        totalPrice += value.expectWorth * fundShares[value.id];
-        if(value.expectGrowth > theBestRate) {
+        if (!!value.expectWorth) {
+          totalPrice += (value.expectWorth * fundShares[value.id]);
+        } else {
+          totalPrice += (value.netWorth * fundShares[value.id]);
+        }
+        if (value.expectGrowth > theBestRate) {
           theBestRate = value.expectGrowth;
           theBestFund = value.name;
         }
       });
       wx.navigateTo({
-        url: getJumpUrl(baseUrl, {totalIncome, totalPrice, theBestFund, theBestRate}),
+        url: getJumpUrl(baseUrl, { totalIncome, totalPrice, theBestFund, theBestRate }),
       })
     }
   }

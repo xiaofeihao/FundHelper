@@ -56,7 +56,7 @@ Page({
     this.startRepeat();
   },
 
-  onHide: function() {
+  onHide: function () {
     console.log('life 首页 onHide')
     this.stopRepeat();
   },
@@ -78,7 +78,11 @@ Page({
         fundItem.expectWorth = item.expectWorth; // 估算净值
         fundItem.expectWorthDate = item.expectWorthDate; // 估算净值日期
         if (!!fundShare[item.code]) {
-          fundItem.income = (fundShare[item.code] * Number(item.expectGrowth) * Number(item.expectWorth) / (100 + Number(item.expectGrowth))).toFixed(2);
+          if (!!item.expectGrowth) {
+            fundItem.income = (fundShare[item.code] * Number(item.expectGrowth) * Number(item.expectWorth) / (100 + Number(item.expectGrowth))).toFixed(2);
+          } else {
+            fundItem.income = 0;
+          }
         } else {
           fundItem.income = 0;
         }
@@ -93,7 +97,7 @@ Page({
         fundData: fundList,
         totalIncome: totalIncome.toFixed(2)
       })
-      if(!!next && typeof next == 'function'){
+      if (!!next && typeof next == 'function') {
         next();
       }
     }, function (error) {
@@ -101,12 +105,12 @@ Page({
     });
   },
 
-  startRepeat: function() {
-    if(!isDealTime()){
+  startRepeat: function () {
+    if (!isDealTime()) {
       console.log('非交易时间');
       return;
     }
-    if(!app.globalData.fundCodes){
+    if (!app.globalData.fundCodes) {
       return;
     }
     var _this = this;
@@ -120,8 +124,8 @@ Page({
     });
   },
 
-  stopRepeat: function() {
-    if(this.data.timeoutNumber) {
+  stopRepeat: function () {
+    if (this.data.timeoutNumber) {
       clearTimeout(this.data.timeoutNumber);
     }
   },

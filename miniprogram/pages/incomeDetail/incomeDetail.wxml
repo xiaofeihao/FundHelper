@@ -38,8 +38,8 @@
     <text class="tips-txt">Tips:{{tips}}</text>
   </view>
 
-  <view class="operate-con">
+  <!-- <view class="operate-con">
     <view class="share-btn"><text class="share-txt">分享</text></view>
-  </view>
+  </view> -->
 
 </view>

@@ -36,8 +36,10 @@ Page({
     var _this = this;
     getHuShen(function (data) {
       if (data) {
+        var date =  (data['date'].split(' ')[0]).slice(5)
         _this.setData({
-          hushen: Number(data['changePercent'])
+          hushen: Number(data['changePercent']),
+          date
         });
       }
     }, function(error) {

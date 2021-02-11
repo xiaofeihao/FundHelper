@@ -1,9 +1,12 @@
 <!--miniprogram/pages/incomeDetail/incomeDetail.wxml-->
 <view class="container">
-
-  <view class="main-content">
+  <view class="main-content" style="background: {{isPositive ? 'linear-gradient(180deg, #FFCCCC, #FFFFFF)' : 'linear-gradient(180deg, #CCFFCC, #FFFFFF)'}}">
+    <!-- <view class="main-content" style="background: linear-gradient(180deg, #D5F5E3, #FFFFFF)"> -->
     <view class="column-container">
-      <text class="module-label">总收益</text>
+      <view class="title-container">
+        <text class="module-label">总收益</text>
+        <text class="date-label">({{date}})</text>
+      </view>
       <text class="module-text"
         style="color:{{isPositive ? '#ff5050':'#2ECC71'}}">{{isPositive ? '+' : '-'}}{{totalIncome}}</text>
     </view>
@@ -11,7 +14,7 @@
     <view class="row-container">
       <view class="column-container">
         <text class="module-label-s">总收益率</text>
-        <text class="module-text-s" style="color:{{isPositive ? '#ff5050':'#2ECC71'}}">{{totalRate}}%</text>
+        <text class="module-text-s" style="color:{{isPositive ? '#ff0000':'#2ECC71'}}">{{totalRate}}%</text>
       </view>
       <view class="column-container">
         <text class="module-label-s">总持仓</text>
@@ -22,12 +25,12 @@
     <view class="row-container">
       <view class="column-container">
         <text class="module-label-s">沪深300</text>
-        <text class="module-text-s" style="color:{{hushen >= 0 ? '#ff5050':'#2ECC71'}}">{{hushen}}%</text>
+        <text class="module-text-s" style="color:{{hushen >= 0 ? '#ff0000':'#2ECC71'}}">{{hushen}}%</text>
       </view>
       <view class="column-container">
         <text class="module-label-s">今日最佳</text>
-        <text class="module-text-xs" style="color:{{isPositive ? '#ff5050':'#2ECC71'}}">{{theBestFund}}</text>
-        <text class="module-text-xxs" style="color:{{isPositive ? '#ff5050':'#2ECC71'}}">{{theBestRate}}%</text>
+        <text class="module-text-xs" style="color:{{isPositive ? '#ff0000':'#2ECC71'}}">{{theBestFund}}</text>
+        <text class="module-text-xxs" style="color:{{isPositive ? '#ff0000':'#2ECC71'}}">{{theBestRate}}%</text>
       </view>
     </view>
   </view>

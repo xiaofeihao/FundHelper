@@ -1,0 +1,42 @@
+<!--miniprogram/pages/incomeDetail/incomeDetail.wxml-->
+<view class="container">
+
+  <view class="main-content">
+    <view class="column-container">
+      <text class="module-label">总收益</text>
+      <text class="module-text"
+        style="color:{{isPositive ? '#ff5050':'#2ECC71'}}">{{isPositive ? '+' : '-'}}{{totalIncome}}</text>
+    </view>
+
+    <view class="row-container">
+      <view class="column-container">
+        <text class="module-label-s">总收益率</text>
+        <text class="module-text-s" style="color:{{isPositive ? '#ff5050':'#2ECC71'}}">{{totalRate}}%</text>
+      </view>
+      <view class="column-container">
+        <text class="module-label-s">总持仓</text>
+        <text class="module-text-s">{{totalPrice}}</text>
+      </view>
+    </view>
+
+    <view class="row-container">
+      <view class="column-container">
+        <text class="module-label-s">沪深300</text>
+        <text class="module-text-s" style="color:{{hushen >= 0 ? '#ff5050':'#2ECC71'}}">{{hushen}}%</text>
+      </view>
+      <view class="column-container">
+        <text class="module-label-s">今日最佳</text>
+        <text class="module-text-xs" style="color:{{isPositive ? '#ff5050':'#2ECC71'}}">{{theBestFund}}</text>
+        <text class="module-text-xxs" style="color:{{isPositive ? '#ff5050':'#2ECC71'}}">{{theBestRate}}%</text>
+      </view>
+    </view>
+  </view>
+  <view class="tips-con">
+    <text class="tips-txt">Tips:{{tips}}</text>
+  </view>
+
+  <view class="operate-con">
+    <view class="share-btn"><text class="share-txt">分享</text></view>
+  </view>
+
+</view>

@@ -1,5 +1,5 @@
-const { isDealTime } = require("../../utils/commonUtils")
-
+const { isDealTime, getJumpUrl } = require("../../utils/commonUtils")
+const app = getApp();
 // components/myFund/index.js
 Component({
   /**
@@ -9,7 +9,7 @@ Component({
     created: function () {
       console.log('life 自选 created')
     },
-    ready: function() {
+    ready: function () {
       console.log('life 自选 ready')
     },
     attached: function () {
@@ -40,10 +40,10 @@ Component({
   data: {
     // 表格标题列
     columns: [
-      { label: '基金名称', width: 220, prop: 'name', subProp: 'id'},
-      { label: '实时估值', width: 100, prop: 'expectGrowth', type: 'percent', subProp: 'expectWorth', date: 'expectWorthDate'},
-      { label: '最新净值', width: 100, prop: 'dayGrowth', type: 'percent', subProp: 'netWorth', date: 'netWorthDate'},
-      { label: '估算收益', width: 180, prop: 'income', type: 'income'}
+      { label: '基金名称', width: 220, prop: 'name', subProp: 'id' },
+      { label: '实时估值', width: 100, prop: 'expectGrowth', type: 'percent', subProp: 'expectWorth', date: 'expectWorthDate' },
+      { label: '最新净值', width: 100, prop: 'dayGrowth', type: 'percent', subProp: 'netWorth', date: 'netWorthDate' },
+      { label: '估算收益', width: 180, prop: 'income', type: 'income' }
     ],
     setting: {
       tableRadius: 0, // 表格圆角
@@ -68,9 +68,9 @@ Component({
   },
 
   observers: {
-    'contentHeight': function(height) {
+    'contentHeight': function (height) {
       this.setData({
-        setting: {...this.data.setting, tbodyHeight: height-130}
+        setting: { ...this.data.setting, tbodyHeight: height - 130 }
       });
     },
     'current': function (index) {
@@ -86,23 +86,41 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    addFund: function() {
+    addFund: function () {
       var _this = this;
       wx.navigateTo({
         url: '/pages/addFunction/addFunction',
         events: {
-          refreshList: function(data) {
+          refreshList: function (data) {
             _this.refresh();
           }
         }
       })
     },
-    clickFundItem: function(value) {
+    clickFundItem: function (value) {
       var editFund = value.detail;
       this.triggerEvent('fundEditAction', editFund)
     },
-    refresh: function() {
+    refresh: function () {
       this.triggerEvent('refreshFund');
+    },
+    jumpToDetail() {
+      var fundShares = app.globalData.fundShare;
+      var baseUrl = '/pages/incomeDetail/incomeDetail';
+      var totalIncome = this.data.totalIncome;
+      var theBestFund = '';
+      var theBestRate = -100;
+      var totalPrice = 0;
+      this.data.fundList.forEach(value => {
+        totalPrice += value.expectWorth * fundShares[value.id];
+        if(value.expectGrowth > theBestRate) {
+          theBestRate = value.expectGrowth;
+          theBestFund = value.name;
+        }
+      });
+      wx.navigateTo({
+        url: getJumpUrl(baseUrl, {totalIncome, totalPrice, theBestFund, theBestRate}),
+      })
     }
   }
 })

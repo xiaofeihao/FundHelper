@@ -1,0 +1,97 @@
+/* miniprogram/pages/incomeDetail/incomeDetail.wxss */
+.container {
+  display: flex;
+  padding: 20rpx;
+}
+
+.main-content {
+  background-color: #ffffff;
+  padding: 40rpx 20rpx;
+  border-radius: 10rpx;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 40rpx);
+}
+
+.column-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.row-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 40rpx;
+}
+
+.module-label {
+  font-size: 38rpx;
+  font-weight: 400;
+  color: #212F3C;
+}
+
+.module-text {
+  font-size: 48rpx;
+  font-weight: 600;
+  color: #FF5050;
+}
+
+.module-label-s {
+  font-size: 28rpx;
+  font-weight: 400;
+  color: #212F3C;
+}
+
+.module-text-s {
+  font-size: 38rpx;
+  font-weight: 600;
+  color: #FF5050;
+}
+
+.tips-con {
+  display: flex;
+  width: 100%;
+  padding: 20rpx 0;
+}
+
+.tips-txt {
+  font-size: 20rpx;
+  color:#566573;
+}
+
+.operate-con {
+  display: flex;
+  width: 100%;
+}
+
+.share-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80rpx;
+  width: 100%;
+  border-radius: 10rpx;
+  background-color: #ff5050;
+}
+
+.share-txt {
+  color: white;
+  font-size: 32rpx;
+}
+
+.module-text-xs {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #FF5050;
+}
+
+.module-text-xxs {
+  font-size: 22rpx;
+  font-weight: 600;
+  color: #FF5050;
+}

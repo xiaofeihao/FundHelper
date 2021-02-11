@@ -20,5 +20,25 @@ function isDealTime() {
   }
 }
 
+function getJumpUrl(url, params) {
+  if (!url) {
+    console.log('无效URL')
+    return '';
+  }
+  if (!Boolean(params)) {
+    return url;
+  }
+  var jumpUrl = url;
+  Object.keys(params).forEach((key, index) => {
+    if (index === 0) {
+      jumpUrl = jumpUrl + '?' + key + '=' + params[key];
+    } else {
+      jumpUrl = jumpUrl + '&' + key + '=' + params[key];
+    }
+  });
+  return jumpUrl;
+}
+
 module.exports.saveFund = saveFund;
 module.exports.isDealTime = isDealTime;
+module.exports.getJumpUrl = getJumpUrl;

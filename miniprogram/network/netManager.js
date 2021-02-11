@@ -2,6 +2,7 @@ var DOMAIN = 'https://api.doctorxiong.club';
 var FUND_INFO = '/v1/fund';
 var BOARD_INFO = '/v1/stock/board';
 var RANK_INFO = '/v1/stock/industry/rank';
+var HUSHEN_INFO = '/v1/stock/min';
 var TOKEN = 'CpBTaOcve5';
 
 function request(config, s, f) {
@@ -42,5 +43,14 @@ export function getBoardInfo(success, fail) {
 export function getRankInfo(success, fail) {
   request({
     url: DOMAIN + RANK_INFO
+  }, success, fail)
+}
+
+export function getHuShen(success, fail) {
+  request({
+    url: DOMAIN + HUSHEN_INFO,
+    data: {
+      code: 'sz399300'
+    }
   }, success, fail)
 }

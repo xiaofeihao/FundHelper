@@ -26,9 +26,9 @@ App({
     console.log('life APP onShow')
   },
   getBaseInfo() {
-    wx.showLoading({
-      title: '正在加载...',
-    });
+    // wx.showLoading({
+    //   title: '正在加载...',
+    // });
     var _this = this;
     wx.getSystemInfo({
       success: res => {

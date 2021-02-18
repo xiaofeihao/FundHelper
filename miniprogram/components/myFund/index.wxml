@@ -12,7 +12,7 @@
   <view wx:if="{{fundList.length>0}}" class="footer-bar" style="margin-bottom:{{needAdapt?80:30}}rpx;">
     <view class="footer-bar-label" bindtap="jumpToDetail">
       <text class="footer-bar-txt-label">今日预估总收益：</text>
-      <text class="footer-bar-txt" style="color:{{!totalIncome ? '#1b1f23' : (totalIncome > 0 ? 'red' : 'green')}}">{{!totalIncome ? '' : (totalIncome > 0 ? '+':'-')}}{{totalIncome}}</text>
+      <text class="footer-bar-txt" style="color:{{!totalIncome ? '#1b1f23' : (totalIncome > 0 ? 'red' : 'green')}}">{{!totalIncome ? '' : (totalIncome > 0 ? '+':'')}}{{totalIncome}}</text>
     </view>
     <view class='footer-btn-con'>
       <image src="../../images/refresh.png" class="footer-image2" bindtap="refresh" mode="aspectFit"/>

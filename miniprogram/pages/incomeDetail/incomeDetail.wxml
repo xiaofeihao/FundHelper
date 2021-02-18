@@ -8,7 +8,7 @@
         <text class="date-label">({{date}})</text>
       </view>
       <text class="module-text"
-        style="color:{{isPositive ? '#ff5050':'#2ECC71'}}">{{isPositive ? '+' : '-'}}{{totalIncome}}</text>
+        style="color:{{isPositive ? '#ff5050':'#2ECC71'}}">{{isPositive ? '+' : ''}}{{totalIncome}}</text>
     </view>
 
     <view class="row-container">
@@ -29,8 +29,8 @@
       </view>
       <view class="column-container">
         <text class="module-label-s">今日最佳</text>
-        <text class="module-text-xs" style="color:{{isPositive ? '#ff0000':'#2ECC71'}}">{{theBestFund}}</text>
-        <text class="module-text-xxs" style="color:{{isPositive ? '#ff0000':'#2ECC71'}}">{{theBestRate}}%</text>
+        <text class="module-text-xs" style="color:{{theBestRate>0 ? '#ff0000':'#2ECC71'}}">{{theBestFund}}</text>
+        <text class="module-text-xxs" style="color:{{theBestRate>0 ? '#ff0000':'#2ECC71'}}">{{theBestRate}}%</text>
       </view>
     </view>
   </view>

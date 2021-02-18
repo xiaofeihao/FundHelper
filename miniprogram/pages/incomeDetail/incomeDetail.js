@@ -23,7 +23,7 @@ Page({
     var totalIncome = Number(query['totalIncome']).toFixed(2);
     var totalPrice = Number(query['totalPrice']).toFixed(2);
     var totalRate = (totalIncome * 100 / (totalPrice - totalIncome)).toFixed(2);
-    var theBestRate = query['theBestRate'];
+    var theBestRate = Number(query['theBestRate']);
     var theBestFund = query['theBestFund'];
     this.setData({
       totalIncome,
